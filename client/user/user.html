@@ -31,21 +31,23 @@
       <div class="six wide field">
         <div class="field">
           <label>Full Name</label>
-          <input type="text" name="name" value="{{user.name}}" placeholder="Roaree TheLion" />
+          <input type="text" name="name" value="{{user.name}}" placeholder="Roarer Lion" />
         </div>
 
         <div class="field">
           <label>What do you study?</label>
-          <input type="text" name="major" value="{{user.major}}" placeholder="Economics" />
+          <input type="text" name="major" value="{{user.major}}" placeholder="Political Science" />
         </div>
 
         <div class="field">
           <label>Year</label>
           <select name="year" class="ui dropdown">
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
+            <option value="First Year">First Year</option>
+            <option value="Sophomore">Sophomore</option>
+            <option value="Junior">Junior</option>
+            <option value="Senior">Senior</option>
+            <option value="Graduate Student">Graduate Student</option>
+            <option value="Alumnus">Alumnus</option>
           </select>
         </div>
 
@@ -59,6 +61,8 @@
           <label for="GS">GS</label>
           <input name="school" type="radio" id="BC" value="BC" />
           <label for="BC">BC</label>
+          <input name="school" type="radio" id="GR" value="GR" />
+          <label for="GR">Graduate School</label>
         </div>
 
       </div>
@@ -73,7 +77,7 @@
 
     <div class="field">
       <label>What do you like? (150 chars)</label>
-      <textarea type="text" name="likes" value="{{user.likes}}" placeholder="football, cheese, marching band, scala, stuffy costumes, epistemology, taqueria y fonda" rows="3"></textarea>
+      <textarea type="text" name="likes" value="{{user.likes}}" placeholder="theater, cheese, marching band, Python, stuffy costumes, epistemology, sweetgreen" rows="3"></textarea>
     </div>
 
     <div class="field">
@@ -86,7 +90,7 @@
       <input type="text" name="availability" value="{{user.availability}}" placeholder="Fridays between 11 am and 1 pm. Any time before 4 pm on Saturday." />
     </div>
 
-    <h4 class="ui dividing header">Are you on the interwebz?</h4>
+    <h4 class="ui dividing header">Share your online presence</h4>
 
     <div class="fields">
       <div class="four wide field">
