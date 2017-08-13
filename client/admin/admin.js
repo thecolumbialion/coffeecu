@@ -47,7 +47,7 @@ Template.displayPeople.helpers({
 
 Template.displayPeople.events({
   'click #delete': function () {
-    Meteor.call('deleteUser', Meteor.userId());
+    Meteor.call('deleteUser', this.owner);
   }
 });
 
