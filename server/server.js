@@ -199,7 +199,7 @@ var VerifyUni = function (uni) {
 var SendEmail = function (to, cc, from, subject, body) {
   check([to, cc, from, subject, body], [String]);
 
-  Meteor.Mailgun.send({
+  Email.send({
     to: to,
     cc: cc,
     from: from,
