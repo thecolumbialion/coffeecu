@@ -24,23 +24,23 @@ Accounts.emailTemplates.from = "Coffee at Columbia <do-not-reply@coffeecu.com>";
 
 // Acconut verification
 Accounts.emailTemplates.verifyEmail.subject = function(user) {
-  return 'Coffee at Columbia - Confirm your email address';
+  return 'Coffee at Columbia - Email Verification';
 };
 
 Accounts.emailTemplates.verifyEmail.text = function(user, url) {
-  return 'Thank you for registering for Coffee at Columbia. Please click on the following link to verify your email address: \n\n' + url;
+  return 'Hi!\nThank you for registering for Coffee at Columbia. Please click the following link to verify your email address: \n\n' + url;
 };
 
 // Reset password
 Accounts.emailTemplates.resetPassword.subject = function (user) {
-    return "Coffee at Columbia - Reset password";
+    return "Coffee at Columbia - Password Reset";
 };
 
 Accounts.emailTemplates.resetPassword.text = function (user, url) {
     var signature = "Coffee at Columbia bot";
 
-    return "Click the following link to reset your password:\n" +
+    return "Hi!\n It looks like you forgot your password. \nClick the following link to reset your password:\n" +
         url + "\n\n" +
         "Cheers,\n" +
-        "Your friends at Coffee at Columbia";
+        "The Coffee at Columbia Team";
 };

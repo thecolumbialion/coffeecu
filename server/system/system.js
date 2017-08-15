@@ -4,9 +4,9 @@ ServiceConfiguration.configurations.remove({
 
 ServiceConfiguration.configurations.insert({
   service: "google",
-  clientId: "209528251350-aearhkobbmti2s2irhk897hvcverboob.apps.googleusercontent.com",
+  clientId: Meteor.settings.private.google.clientId,
   loginStyle: "popup",
-   secret: "Ppu6S-VDzTBV89Z58EmeTJGd"
+   secret: Meteor.settings.private.google.secret
 
 });
 
@@ -14,8 +14,10 @@ ServiceConfiguration.configurations.upsert({
   service: "google"
 }, {
   $set: {
-    clientId: "209528251350-aearhkobbmti2s2irhk897hvcverboob.apps.googleusercontent.com",
+    clientId: Meteor.settings.private.google.clientId,
     loginStyle: "popup",
-    secret: "Ppu6S-VDzTBV89Z58EmeTJGd"
+    secret: Meteor.settings.private.google.secret
   }
 });
+
+
