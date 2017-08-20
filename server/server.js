@@ -177,7 +177,7 @@ var SendEmailForCoffee = function (senderUni, senderName, receiverUni, receiverE
   var from = 'do-not-reply@coffeecu.com';
   var subject = 'Coffee at Columbia: Request from ' + senderName;
   var body = "Hi " + receiverName + ",\n\n" + 
-    senderName + " (cc'ed) wants to chat with you. You two should set some time to hang out. Some great places to meet at Columbia are: Joe's in NoCo, Brad's in the Journalism building, Brownie's Cafe in Avery, Carleton Lounge in Mudd or Cafe East in Lerner. Have a great time talking!\n\n" + 
+    senderName + " (cc'ed) wants to chat with you. You two should set some time to hang out. Some great places to meet at Columbia are: Joe's in NoCo, Up Coffee in the Journalism building, Brownie's Cafe in Avery, Carleton Lounge in Mudd or Cafe East in Lerner. Have a great time talking!\n\n" + 
     "Cheers,\nThe Coffee at Columbia Team\n\n" + "Visit http://coffeecu.com to meet more people.";
 
   SendEmail(to, cc, from, subject, body);

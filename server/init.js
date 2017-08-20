@@ -6,7 +6,7 @@ Meteor.startup(function () {
   });
 
 
-  // For image uplods using meteor-uploads
+  // For image uploads using meteor-uploads
   UploadServer.init({
     tmpDir: process.env.PWD + '/.uploads/tmp',
     uploadDir: process.env.PWD + '/upload',
