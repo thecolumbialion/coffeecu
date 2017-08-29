@@ -179,7 +179,7 @@ SyncedCron.add({
   name: 'Randomize people order every once in a while',
   schedule: function(parser) {
     // parser is a later.parse object
-    return parser.text('every 2 mins');
+    return parser.text('every 15 mins');
   },
   job: function() {
     people = PeopleCollection.find();
