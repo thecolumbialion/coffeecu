@@ -71,7 +71,7 @@ PeopleIndex = new EasySearch.Index({
   collection: PeopleCollection,
   fields: ['name', 'school', 'major', 'contactfor', 'availability', 'likes', 'about', 'uni'],
   engine: new EasySearch.MongoDB({
-    sort: () => { random_sort: 1 },
+     sort: () => {return {random_sort: 1}},
   }),
   name: 'peopleIndex'
 });

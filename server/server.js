@@ -182,12 +182,16 @@ SyncedCron.add({
     return parser.text('every 2 mins');
   },
   job: function() {
-    PendingPeopleCollection.update({}, {$set: {
-      random_sort: Math.random()
-    }});
-    PeopleCollection.update({}, {$set: {
-      random_sort: Math.random()
-    }});
+    people = PeopleCollection.find();
+    people.forEach(function randomize(person) {
+      id = person.owner;
+      PeopleCollection.update(
+        {owner: id},
+        {$set: {
+          random_sort: Math.random()
+        }}
+      );
+    });
   }
 });
 
