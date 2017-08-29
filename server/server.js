@@ -73,6 +73,7 @@ Meteor.methods({
                                       website: userToMove.website,
                                       make_public: userToMove.make_public,
                                       image: userToMove.image,
+                                      random_sort: userToMove.random_sort
                                     }},
                                     {upsert: true});
                                     PendingPeopleCollection.remove({ owner: id });
@@ -101,7 +102,8 @@ Meteor.methods({
                                linkedin,
                                website,
                                make_public,
-                               image
+                               image,
+                               random_sort
                               ) {
                                 if (!Meteor.userId()) {
                                   throw new Meteor.Error('not-authorized');
@@ -127,6 +129,7 @@ Meteor.methods({
                                     website: website,
                                     make_public: make_public,
                                     image: image,
+                                    random_sort: random_sort
                                   }},
                                   {upsert: true});
                                   RejectedPeopleCollection.remove({ owner: id });
@@ -156,6 +159,7 @@ Meteor.methods({
                                                           website: userToMove.website,
                                                           make_public: userToMove.make_public,
                                                           image: userToMove.image,
+                                                          random_sort: userToMove.random_sort
                                                         }},
                                                         {upsert: true});
                                                         PendingPeopleCollection.remove({owner: id});
@@ -169,6 +173,22 @@ Meteor.methods({
                                 PendingPeopleCollection.remove({ owner: id });
                                 RejectedPeopleCollection.remove({ owner: id });                         
                               }
+});
+
+SyncedCron.add({
+  name: 'Randomize people order every once in a while',
+  schedule: function(parser) {
+    // parser is a later.parse object
+    return parser.text('every 2 mins');
+  },
+  job: function() {
+    PendingPeopleCollection.update({}, {$set: {
+      random_sort: Math.random()
+    }});
+    PeopleCollection.update({}, {$set: {
+      random_sort: Math.random()
+    }});
+  }
 });
 
 var SendEmailForCoffee = function (senderUni, senderName, receiverUni, receiverEmail, receiverName) {
