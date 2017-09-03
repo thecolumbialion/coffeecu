@@ -25,4 +25,6 @@ Meteor.startup(function () {
     },
     overwrite: true
   }); 
+
+  SyncedCron.start();
 });
