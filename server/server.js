@@ -173,14 +173,15 @@ Meteor.methods({
 
 var SendEmailForCoffee = function (senderUni, senderName, receiverUni, receiverEmail, receiverName) {
   var to = receiverEmail;
+  var replyTo = receiverEmail;
   var cc = senderUni + '@columbia.edu';
   var from = 'do-not-reply@coffeecu.com';
   var subject = 'Coffee at Columbia: Request from ' + senderName;
   var body = "Hi " + receiverName + ",\n\n" + 
-    senderName + " (cc'ed) wants to chat with you. You two should set some time to hang out. Some great places to meet at Columbia are: Joe's in NoCo, Up Coffee in the Journalism building, Brownie's Cafe in Avery, Carleton Lounge in Mudd or Cafe East in Lerner. Have a great time talking!\n\n" + 
-    "Cheers,\nThe Coffee at Columbia Team\n\n" + "Visit http://coffeecu.com to meet more people.";
+    senderName + " (cc'ed) wants to chat with you. You two should set some time to hang out. We recommend the sender send a second email with some of their availability to help you both get started.\n\nSome great places to meet at Columbia are: Joe's in NoCo, Up Coffee in the Journalism building, Brownie's Cafe in Avery, Carleton Lounge in Mudd or Cafe East in Lerner. Have a great time talking!\n\n" + 
+    "Cheers,\nThe Coffee@CU Team\n\n" + "Visit http://coffeecu.com to meet more people.";
 
-  SendEmail(to, cc, from, subject, body);
+  SendEmail(to, replyTo, cc, from, subject, body);
 
   LogMeeting(senderUni, receiverUni);
 };
@@ -195,11 +196,12 @@ var VerifyUni = function (uni) {
   }
 };
 
-var SendEmail = function (to, cc, from, subject, body) {
-  check([to, cc, from, subject, body], [String]);
+var SendEmail = function (to, replyTo, cc, from, subject, body) {
+  check([to, replyTo, cc, from, subject, body], [String]);
 
   Email.send({
     to: to,
+    replyTo: replyTo,
     cc: cc,
     from: from,
     subject: subject,

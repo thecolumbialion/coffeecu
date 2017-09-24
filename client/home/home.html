@@ -24,6 +24,10 @@
   <div class="welcome">
     {{#markdown}}{{welcome}}{{/markdown}}
   </div>
+    <div class="searchbox">
+    <h3 class="ui header">Search for Columbia students to meet</h3>
+    {{> EasySearch.Input index=peopleIndex attributes=inputAttributes }}
+  </div>
 </template>
 
 <template name="meetingsMade">
@@ -43,10 +47,6 @@
 
 <template name="people">
   <div class="people-home">
-    <div class="searchbox">
-      <h3 class="ui header">Search for Columbia students to meet</h3>
-      {{> EasySearch.Input index=peopleIndex attributes=inputAttributes }}
-    </div>
 
     <div class="ui accordion">
       <div class="ui four column doubling stackable grid container">
@@ -100,7 +100,7 @@
         {{/EasySearch.Each}}
       </div>
 
-      {{> EasySearch.LoadMore index=peopleIndex attributes=loadButtonAttributes count=45}}
+      {{> EasySearch.LoadMore index=peopleIndex attributes=loadButtonAttributes count=12}}
 
       {{#EasySearch.IfNoResults index=peopleIndex}}
       <div class="no-results">No results found</div>
