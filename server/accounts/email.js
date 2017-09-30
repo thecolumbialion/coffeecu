@@ -6,7 +6,7 @@ Accounts.validateNewUser( function (user) {
     email = user.emails[0].address.toLowerCase();
   }
 
-  if (/[a-z]{2,3}\d*@[a-z]*\.*(barnard|columbia)\.edu$/.test(email))  {
+  if (/[a-z]{2,3}\d*@(tc.|gsb.|law.)*(barnard|columbia)\.edu$/.test(email))  {
     return true;
   } else {
     throw new Meteor.Error(403, "Use a <UNI>@columbia.edu or <UNI>@barnard.edu email address.");
