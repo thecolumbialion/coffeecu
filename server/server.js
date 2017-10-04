@@ -80,9 +80,9 @@ Meteor.methods({
                                     // Send email
                                     var to = userToMove.username;
                                     var from = 'do-not-reply@coffeecu.com';
-                                    var subject = 'Coffee at Columbia: Profile update declined';
+                                    var subject = 'Coffee@CU: Profile update declined';
                                     var body = "Hi,\n\n" + 
-                                      "Your recent profile update request to Coffee at Columbia was rejected.\n\nReason: " + reason + "\n\nPlease make the above changes and request an update to your profile again at http://coffeecu.com.\n\nCheers,\nThe Coffee at Columbia Team ";
+                                      "Your recent profile update request to Coffee@CU was rejected.\n\nReason: " + reason + "\n\nPlease make the above changes and request an update to your profile again at http://coffeecu.com.\n\nCheers,\nThe Coffee@CU Team ";
                                     SendEmail(to, "", from, subject, body);
   },
   insertPendingUser: function (id,
@@ -176,7 +176,7 @@ var SendEmailForCoffee = function (senderUni, senderName, receiverUni, receiverE
   var replyTo = receiverEmail;
   var cc = senderUni + '@columbia.edu';
   var from = 'do-not-reply@coffeecu.com';
-  var subject = 'Coffee at Columbia: Request from ' + senderName;
+  var subject = 'Coffee@CU: Request from ' + senderName;
   var body = "Hi " + receiverName + ",\n\n" + 
     senderName + " (cc'ed) wants to chat with you. You two should set some time to hang out. We recommend the sender send a second email with some of their availability to help you both get started.\n\nSome great places to meet at Columbia are: Joe's in NoCo, Up Coffee in the Journalism building, Brownie's Cafe in Avery, Carleton Lounge in Mudd or Cafe East in Lerner. Have a great time talking!\n\n" + 
     "Cheers,\nThe Coffee@CU Team\n\n" + "Visit http://coffeecu.com to meet more people.";
