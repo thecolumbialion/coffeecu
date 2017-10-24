@@ -44,6 +44,8 @@ You need to create a file called `settings.json` at `coffeecu/` formatted as fol
 
 Install Meteor first with `curl https://install.meteor.com/ | sh`. Finally perform `./run.sh` to start the app and view it in your browser at `http://localhost:3000`.
 
+To restore a database given a database dump (you can ask Lesley to grab one), use . `mongorestore -h 127.0.0.1 --port 3001 -d meteor PATH` where `PATH` is the path to your restoration directory.
+
 Only tested on Chrome. ¯\\\_(ツ)_/¯
 
 

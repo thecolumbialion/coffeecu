@@ -20,12 +20,12 @@ Meteor.methods({
       // then check rejected
       person = RejectedPeopleCollection.findOne({owner: id});
     }
-    
+
     if (!person) {
       // finally check master
       person = PeopleCollection.findOne({owner: id});
     }
-   
+
     return person;
   }
 });
@@ -73,5 +73,8 @@ PeopleIndex = new EasySearch.Index({
   engine: new EasySearch.MongoDB({
   sort: () => { random_sort: 1 },
   }),
-  name: 'peopleIndex'
+  name: 'peopleIndex',
+  defaultSearchOptions: {
+    limit: 9
+  },
 });
