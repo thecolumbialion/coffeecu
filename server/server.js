@@ -36,7 +36,7 @@ Meteor.methods({
           this.unblock();
 
           var senderName = GetFirstName(senderUni);
-          UniCollection.insert({uni: senderUni, name: senderName});   
+          UniCollection.insert({uni: senderUni, name: senderName});
 
           SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName);
         } else {
@@ -54,10 +54,10 @@ Meteor.methods({
 
     // Move to rejected users
     var userToMove = PendingPeopleCollection.findOne({owner: id});
-    RejectedPeopleCollection.update({owner: id}, 
+    RejectedPeopleCollection.update({owner: id},
                                     {$set: {
-                                      owner: id, 
-                                      username: userToMove.username,        
+                                      owner: id,
+                                      username: userToMove.username,
                                       name: userToMove.name,
                                       uni: userToMove.uni,
                                       school: userToMove.school,
@@ -82,7 +82,7 @@ Meteor.methods({
                                     var to = userToMove.username;
                                     var from = 'do-not-reply@coffeecu.com';
                                     var subject = 'Coffee@CU: Profile update declined';
-                                    var body = "Hi,\n\n" + 
+                                    var body = "Hi,\n\n" +
                                       "Your recent profile update request to Coffee@CU was rejected.\n\nReason: " + reason + "\n\nPlease make the above changes and request an update to your profile again at http://coffeecu.com.\n\nCheers,\nThe Coffee@CU Team ";
                                     SendEmail(to, "", from, subject, body);
   },
@@ -112,8 +112,8 @@ Meteor.methods({
                                 PendingPeopleCollection.update(
                                   {owner: id},
                                   {$set: {
-                                    owner: id, 
-                                    username: username,        
+                                    owner: id,
+                                    username: username,
                                     name: name,
                                     uni: uni,
                                     school: school,
@@ -140,10 +140,10 @@ Meteor.methods({
                                   return;
                                 }
                                 var userToMove = PendingPeopleCollection.findOne({owner: id});
-                                PeopleCollection.update({ owner: id }, 
+                                PeopleCollection.update({ owner: id },
                                                         {$set: {
-                                                          owner: id, 
-                                                          username: userToMove.username,        
+                                                          owner: id,
+                                                          username: userToMove.username,
                                                           name: userToMove.name,
                                                           uni: userToMove.uni,
                                                           school: userToMove.school,
@@ -171,7 +171,7 @@ Meteor.methods({
                                 }
                                 PeopleCollection.remove({ owner: id });
                                 PendingPeopleCollection.remove({ owner: id });
-                                RejectedPeopleCollection.remove({ owner: id });                         
+                                RejectedPeopleCollection.remove({ owner: id });
                               }
 });
 
@@ -179,7 +179,7 @@ SyncedCron.add({
   name: 'Randomize people order every once in a while',
   schedule: function(parser) {
     // parser is a later.parse object
-    return parser.cron('00 04 * * ? *');
+    return parser.cron('0 4 * * *');
   },
   job: function() {
     people = PeopleCollection.find();
@@ -201,8 +201,8 @@ var SendEmailForCoffee = function (senderUni, senderName, receiverUni, receiverE
   var cc = senderUni + '@columbia.edu';
   var from = 'do-not-reply@coffeecu.com';
   var subject = 'Coffee@CU: Request from ' + senderName;
-  var body = "Hi " + receiverName + ",\n\n" + 
-    senderName + " (cc'ed) wants to chat with you. You two should set some time to hang out. We recommend the sender send a second email with some of their availability to help you both get started.\n\nSome great places to meet at Columbia are: Joe's in NoCo, Up Coffee in the Journalism building, Brownie's Cafe in Avery, Carleton Lounge in Mudd or Cafe East in Lerner. Have a great time talking!\n\n" + 
+  var body = "Hi " + receiverName + ",\n\n" +
+    senderName + " (cc'ed) wants to chat with you. You two should set some time to hang out. We recommend the sender send a second email with some of their availability to help you both get started.\n\nSome great places to meet at Columbia are: Joe's in NoCo, Up Coffee in the Journalism building, Brownie's Cafe in Avery, Carleton Lounge in Mudd or Cafe East in Lerner. Have a great time talking!\n\n" +
     "Cheers,\nThe Coffee@CU Team\n\n" + "Visit http://coffeecu.com to meet more people.";
 
   SendEmail(to, replyTo, cc, from, subject, body);
@@ -245,5 +245,5 @@ var LogMeeting = function(senderUni, receiverUni) {
 };
 
 IsAdmin = function(id) {
-  return Meteor.settings.private.admins.indexOf(id) > -1;  
+  return Meteor.settings.private.admins.indexOf(id) > -1;
 };
