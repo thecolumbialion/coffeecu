@@ -231,6 +231,7 @@ Template.profileupdate.events({
     var linkedin = event.target.linkedin.value;
     var website = event.target.website.value;
     var make_public = event.target.make_public.checked;
+    var random_sort = Math.random();
 
     var image = event.target.image.src;
     if (Session.get('UploadedImageUrl')) {
@@ -255,13 +256,14 @@ Template.profileupdate.events({
                 linkedin,
                 website,
                 make_public,
-                image
+                image,
+                random_sort
                );
 
                Materialize.toast('Your profile is currently under review and will be posted once approved.', 4000);
   },
   'click #deleteprofile': function() {
-    event.preventDefault();    
+    event.preventDefault();
     Meteor.call('deleteUser', Meteor.userId());
     Materialize.toast('Your profile has been successfully deleted.', 4000);
   }
