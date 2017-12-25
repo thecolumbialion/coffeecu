@@ -51,18 +51,19 @@ Meteor.methods({
         this.unblock();
         SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
       } 
-      /* TO-DO: can we just find a way to remove needing this else? */
-      else { // else, call API to check validity of UNI
-        if (VerifyUni(senderUni)) {
+      /* If we reach else statement, that means user should not be making a request */
+      else { 
+        /*if (VerifyUni(senderUni)) {
           this.unblock();
           //we should remove this check so people not in directory can use the site.
           var senderName = GetFirstName(senderUni);
           UniCollection.insert({uni: senderUni, name: senderName});
 
           SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
-        } else {
+        }  else {
+          return "Invalid UNI"; } */
           return "Invalid UNI";
-        }
+        
       }
       return "Email sent to " + receiverName;
     }
@@ -254,12 +255,12 @@ var SendEmail = function (to, replyTo, cc, from, subject, body) {
   });
 };
 
-var GetFirstName = function (uni) {
+/*var GetFirstName = function (uni) {
   var convertAsyncToSync  = Meteor.wrapAsync(HTTP.get),
     resultOfAsyncToSync = convertAsyncToSync('http://uniatcu.herokuapp.com/info?uni=' + uni, {});
   var firstname = resultOfAsyncToSync.data.data.name.split(' ')[0];
   return firstname;
-};
+}; */
 
 var LogMeeting = function(senderUni, receiverUni) {
   MeetingsCollection.insert({sender_uni: senderUni, receiver_uni: receiverUni});
