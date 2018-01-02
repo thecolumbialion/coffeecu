@@ -90,12 +90,21 @@
               {{#if website}}
               <a target="_blank" class="ui cloud button" href="{{website}}"><i class="cloud icon"></i ></a>
               {{/if}}
-              <!-- Can only grab coffee if logged in -->
-              <div class="ui center aligned contact-button">
+              
+              <!-- If user is logged in, allow them to see the Grab Coffee button -->
+              {{#if currentUser }}
+                  <div class="ui center aligned contact-button">
                 <button id="contact" class="waves-effect waves-light btn">Grab coffee</button>
-              </div>
+              </div> 
+              <!-- If user is not logged in, tell them to sign in instead (we need to be able to pull their uni) -->
               {{else}}
-              <b>This profile is private</b> <p>To learn more about this person, please sign in with your Columbia email address.</p>
+              <br><br>
+              <b>You're not currently logged in.</b> <p>To send coffee requests, please <a href="/login">sign in</a> with your Columbia email address.</p>
+              {{/if}}
+              <!-- If account is marked as private, make sure sign in to see information -->
+              {{else}}
+              <b>This profile is private. </b> <p>To learn more about this person, please sign in with your Columbia email address.</p>
+
               {{/if}}
             </div>
 
@@ -117,11 +126,11 @@
 
 <template name="uniPrompt">
   <div class="ui modal">
-    <div class="header">Please enter your UNI</div>
+      <div class="header">Enter a message to go along with your request.</div>
     <div class="content">
       <div class="field">
-        <input type="text" name="senderUni" id="senderUni" />
-        <label for="senderUni">UNI</label>
+        <input type="text" name="Additional Message" id="additionalMessage" />
+        <label for="Additional Message">Additional Message</label>
         <div class="field recaptcha-box">
           <label>Complete the reCAPTCHA before sending your request</label>
           {{> reCAPTCHA widget_id="1"}}

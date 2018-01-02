@@ -74,8 +74,16 @@ Template.people.events({
         var receiver = Session.get('currentlySelected').owner;
         var receiverUni = Session.get('currentlySelected').uni;
         var receiverName = Session.get('currentlySelected').name;
-        var senderUni = $("#senderUni").val();
+        var additionalMessage = $("#additionalMessage").val();
         var recaptcha = reCAPTCHA.getResponse("1");
+        Meteor.call('processSendRequest', Meteor.userId(), receiver, receiverUni, receiverName, additionalMessage, recaptcha, function (error, response) {
+        if (error) {
+            Materialize.toast('Failed to send email', 4000);
+            console.log(error);
+          } else {
+            Materialize.toast(response, 4000);
+          }
+        });
 
         if(senderUni != receiverUni) {
           Meteor.call('processSendRequest', senderUni, receiver, receiverUni, receiverName, recaptcha, function (error, response) {
