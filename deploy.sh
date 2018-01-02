@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mupx deploy
+mup deploy
 echo "Copying images from last to current bundle..."
 mkdir /opt/coffeecu/current/bundle/.uploads
 cp -r /opt/coffeecu/last/bundle/.uploads/* /opt/coffeecu/current/bundle/.uploads

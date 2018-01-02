@@ -1,12 +1,12 @@
 Meteor.startup(function() {
   if (Meteor.isClient) {
     return SEO.config({
-      title: 'Coffee at Columbia',
+      title: 'Coffee@CU',
       meta: {
-        'description': 'Grab coffee with Columbia students. Make friends, get mentors, help underclassmen in the Columbia community.'
+        'description': 'Make friends, get mentors, and make the Columbia community stronger.'
       },
       og: {
-        'title': 'Coffee at Columbia'
+        'title': 'Coffee@CU'
       }
     });
   }
