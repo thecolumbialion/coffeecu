@@ -221,18 +221,19 @@ var SendEmailForCoffee = function (senderUni, senderName, receiverUni, receiverE
   var replyTo = receiverEmail;
   var cc = senderUni + '@columbia.edu';
   var from = 'do-not-reply@coffeecu.com';
-  var subject = 'Coffee at Columbia: Request from ' + senderName;
+  var subject = 'Coffee@CU: Request from ' + senderName;
   var body = "Hi " + receiverName + ",\n\n" +
     senderName + " (cc'ed) wants to chat with you.\n\n" + "Here's the message they included: " + additionalMessage  
     + "\n\nYou two should set some time to hang out. Some great places to meet at Columbia are: Joe's in NoCo, Up Coffee in the Journalism building, Brownie's Cafe in Avery, Carleton Lounge in Mudd or Cafe East in Lerner. Have a great time talking!\n\n" +
-    "Cheers,\nThe Coffee at Columbia Team\n\n" + "Visit http://coffeecu.com to meet more Columbians.\n";
+    "Cheers,\nThe Coffee@CU Team\n\n" + "Visit http://coffeecu.com to meet more Columbians.\n";
 
   SendEmail(to, replyTo, cc, from, subject, body);
   LogMeeting(senderUni, receiverUni);
 };
 
 
-var VerifyUni = function (uni) {
+/* to be deleted */
+/*var VerifyUni = function (uni) {
   var convertAsyncToSync  = Meteor.wrapAsync(HTTP.get),
     resultOfAsyncToSync = convertAsyncToSync('http://uniatcu.herokuapp.com/exists?uni=' + uni, {});
   if(resultOfAsyncToSync.data.exists == 'true') {
@@ -240,7 +241,7 @@ var VerifyUni = function (uni) {
   } else {
     return false;
   }
-};
+}; */
 
 var SendEmail = function (to, replyTo, cc, from, subject, body) {
   check([to, replyTo, cc, from, subject, body], [String]);
