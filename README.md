@@ -1,6 +1,6 @@
-# Coffee at Columbia
+# Coffee@CU
 
-To run locally, clone the repo with `git clone --recursive https://github.com/parthibanloganathan/coffeecu.git` so that you get the submodule for [materialize-custom](https://github.com/parthibanloganathan/materialize-custom) as well.
+To run locally, clone the repo with `git clone https://github.com/thecolumbialion/coffeecu.git`
 
 You need to create a file called `settings.json` at `coffeecu/` formatted as follows:
 ```
@@ -42,12 +42,11 @@ You need to create a file called `settings.json` at `coffeecu/` formatted as fol
 
 ```
 
-Install Meteor first with `curl https://install.meteor.com/ | sh`. Finally perform `./run.sh` to start the app and view it in your browser at `http://localhost:3000`.
+For deploying with [Meteor Up](https://github.com/zodern/meteor-up), you'll need to create a `.deploy` folder that also includes a settings.json file and a mup.js file.
 
-To restore a database given a database dump (you can ask Lesley to grab one), use . `mongorestore -h 127.0.0.1 --port 3001 -d meteor PATH` where `PATH` is the path to your restoration directory.
+Before running the app, you'll need to install Meteor first with `curl https://install.meteor.com/ | sh`. Next, to run the app locally, you need to type `meteor --settings=settings.json` on the command line. If it works, you will be able to view a local version of the app in your browser at `http://localhost:3000`. You can also add `--port=PORT` in order to change localhost to run on a different port number.
 
-Only tested on Chrome. ¯\\\_(ツ)_/¯
-
+To restore a database given a database dump (you can email coffeecu@adicu.com to grab one), use . `mongorestore -h 127.0.0.1 --port 3001 -d meteor PATH` where `PATH` is the path to your restoration directory.
 
 Dependencies
 ------------
@@ -100,7 +99,7 @@ Do not enter a passphrase or password — just click enter until the key is gene
 
 You will need the file path to the public key for deploying the app, so be sure to save it. 
 Once you have gotten the actual key, log into the Digital ocean account. Click the profile photo image, go to settings, then security, and an account for your name. In the box that pops up, paste your full key. If done correctly, you will now be able to ssh into the droplet from your computer by typing:
-ssh root@coffeecu.com (if that fails, you can also try ssh root@162.243.165.50 or whatever the IP address you are working with is)
+ssh root@coffeecu.com (if that fails, you can also try ssh root@100.000.000.00 or whatever the IP address you are working with is)
 
 For trouble shooting, you can visit https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-freebsd-server for more tips and instructions.
 
@@ -140,8 +139,8 @@ You mup.js file should look like this
       // If you are using ssl, it needs to start with https://
       ROOT_URL: 'http://coffeecu.com',
       MONGO_URL: 'mongodb://localhost/meteor',
-//mailgun url      
-MAIL_URL: ‘MAIL URL’,
+  //mailgun url      
+  MAIL_URL: ‘MAIL URL’,
     },
 
     // ssl: { // (optional)
