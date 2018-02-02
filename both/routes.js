@@ -8,11 +8,21 @@ Router.route('/', function () {
 });
 
 Router.route('/user/:userid', function () {
-  this.render('User');
+  if (this.params.userid == Meteor.userId()){
+    this.render('User');
+  }
+  else {
+    this.render('404');
+  }
 });
 
 Router.route('/admin', function () {
-  this.render('Admin');
+  if (Session.get('isAdmin')){
+    this.render('Admin');
+  }
+  else {
+    Router.go('/');
+  }
 });
 
 Router.route('/uploads/:userid', function () {
