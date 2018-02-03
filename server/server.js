@@ -49,10 +49,9 @@ Meteor.methods({
         this.unblock();
         SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
       } 
-      /* If we reach else statement, that means user should not be making a request */
-      else {n
+      /* Else, add the user to the cache*/
+      else {
           this.unblock();
-          //we should remove this check so people not in directory can use the site.
           var senderName = GetFirstName(senderUni);
           UniCollection.insert({uni: senderUni, name: senderName});
 
