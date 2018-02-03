@@ -7,7 +7,6 @@ Meteor.methods({
   },
 
   getSenderUni: function(id) {
-    console.log("here");
     var convertAsyncToSync  = Meteor.wrapAsync(function(id) {
       var user = PeopleCollection.findOne({owner: id});
       //console.log("in function");
@@ -25,7 +24,6 @@ Meteor.methods({
     }
 
     var senderUni = PeopleCollection.findOne({owner: senderId})['uni'];
-    console.log("senderUni: " + senderUni + ", receiverUni:" + receiverUni);
     if (senderUni == receiverUni){
       return "Cannot send a coffee request to yourself";
     }
@@ -44,7 +42,6 @@ Meteor.methods({
       // Check UNI cache first
 
       var uni_details = UniCollection.find({ uni: senderUni }).fetch();
-      console.log(uni_details);
       // If in cache, use that first
       if (uni_details.length > 0) {
         senderName = uni_details[0].name;
@@ -53,7 +50,7 @@ Meteor.methods({
         SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
       } 
       /* If we reach else statement, that means user should not be making a request */
-      else {
+      else {n
           this.unblock();
           //we should remove this check so people not in directory can use the site.
           var senderName = GetFirstName(senderUni);
