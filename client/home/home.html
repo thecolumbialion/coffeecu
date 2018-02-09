@@ -74,6 +74,12 @@
               {{#if makeVisible}}
               <p>{{school}} {{year}}</p>
               <p><b>Studies:</b> {{major}}</p>
+              {{#if pronouns}}
+              <p><b>Pronouns:</b> {{pronouns}}</p>
+              {{/if}}
+              {{#if pronounsBox}}
+              <p><b>Pronouns:</b> {{pronounsBox}}</p>
+              {{/if}}
               <p><b>About:</b> {{about}}</p>
               <p><b>Likes:</b> {{likes}}</p>
               <p><b>Contact me for:</b> {{contactfor}}</p>
@@ -90,12 +96,12 @@
               {{#if website}}
               <a target="_blank" class="ui cloud button" href="{{website}}"><i class="cloud icon"></i ></a>
               {{/if}}
-              
+
               <!-- If user is logged in, allow them to see the Grab Coffee button -->
               {{#if currentUser }}
                   <div class="ui center aligned contact-button">
                 <button id="contact" class="waves-effect waves-light btn">Grab coffee</button>
-              </div> 
+              </div>
               <!-- If user is not logged in, tell them to sign in instead (we need to be able to pull their uni) -->
               {{else}}
               <br><br>

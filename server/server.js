@@ -50,9 +50,9 @@ Meteor.methods({
 
         this.unblock();
         SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
-      } 
+      }
       /* If we reach else statement, that means user should not be making a request */
-      else { 
+      else {
         /*if (VerifyUni(senderUni)) {
           this.unblock();
           //we should remove this check so people not in directory can use the site.
@@ -63,7 +63,7 @@ Meteor.methods({
         }  else {
           return "Invalid UNI"; } */
           return "Invalid UNI";
-        
+
       }
       return "Email sent to " + receiverName;
     }
@@ -84,6 +84,8 @@ Meteor.methods({
                                       school: userToMove.school,
                                       year: userToMove.year,
                                       major: userToMove.major,
+                                      pronouns: userToMove.pronouns,
+                                      pronounsBox: userToMove.pronounsBox,
                                       about: userToMove.about,
                                       likes: userToMove.likes,
                                       contactfor: userToMove.contactfor,
@@ -114,6 +116,8 @@ Meteor.methods({
                                school,
                                year,
                                major,
+                               pronouns,
+                               pronounsBox,
                                about,
                                likes,
                                contactfor,
@@ -140,6 +144,8 @@ Meteor.methods({
                                     school: school,
                                     year: year,
                                     major: major,
+                                    pronouns: pronouns,
+                                    pronounsBox: pronounsBox,
                                     about: about,
                                     likes: likes,
                                     contactfor: contactfor,
@@ -170,6 +176,8 @@ Meteor.methods({
                                                           school: userToMove.school,
                                                           year: userToMove.year,
                                                           major: userToMove.major,
+                                                          pronouns: userToMove.pronouns,
+                                                          pronounsBox: userToMove.pronounsBox,
                                                           about: userToMove.about,
                                                           likes: userToMove.likes,
                                                           contactfor: userToMove.contactfor,
@@ -223,7 +231,7 @@ var SendEmailForCoffee = function (senderUni, senderName, receiverUni, receiverE
   var from = 'do-not-reply@coffeecu.com';
   var subject = 'Coffee@CU: Request from ' + senderName;
   var body = "Hi " + receiverName + ",\n\n" +
-    senderName + " (cc'ed) wants to chat with you.\n\n" + "Here's the message they included: " + additionalMessage  
+    senderName + " (cc'ed) wants to chat with you.\n\n" + "Here's the message they included: " + additionalMessage
     + "\n\nYou two should set some time to hang out. Some great places to meet at Columbia are: Joe's in NoCo, Up Coffee in the Journalism building, Brownie's Cafe in Avery, Carleton Lounge in Mudd or Cafe East in Lerner. Have a great time talking!\n\n" +
     "Cheers,\nThe Coffee@CU Team\n\n" + "Visit http://coffeecu.com to meet more Columbians.\n";
 

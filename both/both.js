@@ -69,7 +69,7 @@ RejectedPeopleCollection.deny({
 // Search box
 PeopleIndex = new EasySearch.Index({
   collection: PeopleCollection,
-  fields: ['name', 'school', 'major', 'contactfor', 'availability', 'likes', 'about', 'uni'],
+  fields: ['name', 'school', 'major', 'pronouns', 'pronounsBox', 'contactfor', 'availability', 'likes', 'about', 'uni'],
   engine: new EasySearch.MongoDB({
     sort: function() {
       return [["random_sort", "asc"]];
@@ -77,6 +77,6 @@ PeopleIndex = new EasySearch.Index({
   }),
   name: 'peopleIndex',
   defaultSearchOptions: {
-    limit: 9
+    limit: 12
   },
 });
