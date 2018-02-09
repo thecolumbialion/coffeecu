@@ -1,5 +1,7 @@
 settings.json
 *.swp
 .uploads/*
+upload/*
 logs/
 .DS_Store
+node_modules/*

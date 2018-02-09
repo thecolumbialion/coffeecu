@@ -76,7 +76,7 @@ Template.people.events({
         var receiverName = Session.get('currentlySelected').name;
         var additionalMessage = $("#additionalMessage").val();
         var recaptcha = reCAPTCHA.getResponse("1");
-        Meteor.call('processSendRequest', Meteor.userId(), receiver, receiverUni, receiverName, additionalMessage, recaptcha, function (error, response) {
+        Meteor.call('processSendRequest', Meteor.userId(), receiver, receiverUni, receiverName, additionalMessage, recaptcha,function (error, response) {
         if (error) {
             Materialize.toast('Failed to send email', 4000);
             console.log(error);
