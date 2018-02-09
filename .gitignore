@@ -4,3 +4,4 @@ settings.json
 upload/*
 logs/
 .DS_Store
+node_modules/*
