@@ -7,7 +7,6 @@ Meteor.methods({
   },
 
   getSenderUni: function(id) {
-    console.log("here");
     var convertAsyncToSync  = Meteor.wrapAsync(function(id) {
       var user = PeopleCollection.findOne({owner: id});
       //console.log("in function");
@@ -25,7 +24,6 @@ Meteor.methods({
     }
 
     var senderUni = PeopleCollection.findOne({owner: senderId})['uni'];
-
     if (senderUni == receiverUni){
       return "Cannot send a coffee request to yourself";
     }
@@ -40,10 +38,10 @@ Meteor.methods({
 
     var receiverEmail = PeopleCollection.findOne({ owner: receiver }).username;
 
-    if (senderUni !== null) {
+    if (senderUni != null) {
       // Check UNI cache first
-      var uni_details = UniCollection.find({ uni: senderUni }).fetch();
 
+      var uni_details = UniCollection.find({ uni: senderUni }).fetch();
       // If in cache, use that first
       if (uni_details.length > 0) {
         senderName = uni_details[0].name;
@@ -51,18 +49,13 @@ Meteor.methods({
         this.unblock();
         SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
       } 
-      /* If we reach else statement, that means user should not be making a request */
-      else { 
-        /*if (VerifyUni(senderUni)) {
+      /* Else, add the user to the cache*/
+      else {
           this.unblock();
-          //we should remove this check so people not in directory can use the site.
           var senderName = GetFirstName(senderUni);
           UniCollection.insert({uni: senderUni, name: senderName});
 
           SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
-        }  else {
-          return "Invalid UNI"; } */
-          return "Invalid UNI";
         
       }
       return "Email sent to " + receiverName;
@@ -232,17 +225,6 @@ var SendEmailForCoffee = function (senderUni, senderName, receiverUni, receiverE
 };
 
 
-/* to be deleted */
-/*var VerifyUni = function (uni) {
-  var convertAsyncToSync  = Meteor.wrapAsync(HTTP.get),
-    resultOfAsyncToSync = convertAsyncToSync('http://uniatcu.herokuapp.com/exists?uni=' + uni, {});
-  if(resultOfAsyncToSync.data.exists == 'true') {
-    return true;
-  } else {
-    return false;
-  }
-}; */
-
 var SendEmail = function (to, replyTo, cc, from, subject, body) {
   check([to, replyTo, cc, from, subject, body], [String]);
 
@@ -256,12 +238,12 @@ var SendEmail = function (to, replyTo, cc, from, subject, body) {
   });
 };
 
-/*var GetFirstName = function (uni) {
+var GetFirstName = function (uni) {
   var convertAsyncToSync  = Meteor.wrapAsync(HTTP.get),
     resultOfAsyncToSync = convertAsyncToSync('http://uniatcu.herokuapp.com/info?uni=' + uni, {});
   var firstname = resultOfAsyncToSync.data.data.name.split(' ')[0];
   return firstname;
-}; */
+};
 
 var LogMeeting = function(senderUni, receiverUni) {
   MeetingsCollection.insert({sender_uni: senderUni, receiver_uni: receiverUni});
