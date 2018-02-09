@@ -84,18 +84,7 @@ Template.people.events({
             Materialize.toast(response, 4000);
           }
         });
-
-        if(senderUni != receiverUni) {
-          Meteor.call('processSendRequest', senderUni, receiver, receiverUni, receiverName, recaptcha, function (error, response) {
-            if (error) {
-              Materialize.toast('Failed to send email', 4000);
-              console.log(error);
-            } else {
-              Materialize.toast(response, 4000);
-            }
-          });
-        }
-
+          
         reCAPTCHA.reset("1");
       }
     }).modal('show');
