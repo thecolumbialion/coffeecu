@@ -28,7 +28,7 @@ Template.displayPendingPeople.events({
 
     var id = this.owner;
     var reason = event.target.reason.value;
-   
+
     Meteor.call('rejectPendingUser', id, reason);
   },
   'click #accept': function () {
@@ -50,4 +50,3 @@ Template.displayPeople.events({
     Meteor.call('deleteUser', this.owner);
   }
 });
-
