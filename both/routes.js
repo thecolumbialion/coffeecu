@@ -17,6 +17,11 @@ Router.route('/user/:userid', function () {
 });
 
 Router.route('/admin', function () {
+  Meteor.call('isAdmin', function (error, response) {
+    if (!response){
+      Router.go('/');
+    }
+  });
   this.render('Admin');
 });
 
