@@ -17,12 +17,7 @@ Router.route('/user/:userid', function () {
 });
 
 Router.route('/admin', function () {
-  if (IsAdmin(Meteor.userId())){
-    this.render('Admin');
-  }
-  else {
-    this.render('Home');
-  }
+  this.render('Admin');
 });
 
 Router.route('/uploads/:userid', function () {
