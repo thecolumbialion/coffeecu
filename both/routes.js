@@ -17,12 +17,12 @@ Router.route('/user/:userid', function () {
 });
 
 Router.route('/admin', function () {
-  if (Session.get('isAdmin')){
-    this.render('Admin');
-  }
-  else {
-    Router.go('/');
-  }
+  Meteor.call('isAdmin', function (error, response) {
+    if (!response){
+      Router.go('/');
+    }
+  });
+  this.render('Admin');
 });
 
 Router.route('/uploads/:userid', function () {
