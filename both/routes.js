@@ -17,11 +17,11 @@ Router.route('/user/:userid', function () {
 });
 
 Router.route('/admin', function () {
-  if (Session.get('isAdmin')){
+  if (IsAdmin(Meteor.userId())){
     this.render('Admin');
   }
   else {
-    Router.go('/');
+    this.render('Home');
   }
 });
 
