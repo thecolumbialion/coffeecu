@@ -41,25 +41,8 @@
 
         <div class="field">
                   <label>Pronouns</label>
-                  <select name="pronouns" class="ui dropdown" value="{{user.pronouns}}" onchange="ifSelected(this);">
-                    <option value=""></option>
-                    <option value="She/Her/Hers">She/Her/Hers</option>
-                    <option value="He/Him/His">He/Him/His</option>
-                    <option value="They/Them/Theirs">They/Them/Theirs</option>
-                    <option value="">Other</option>
-                  </select>
-                 <input type="text" name="pronounsBox" id="pronounsBox" value="{{user.pronounsBox}}" placeholder="Other Pronouns" />
-                </div>
-                <script>
-                document.getElementById("pronounsBox").style.display = "none";
-                function ifSelected(that) {
-                  if (that.value == "") {
-                    document.getElementById("pronounsBox").style.display = "block";
-                  } else {
-                    document.getElementById("pronounsBox").style.display = "none";
-                  }
-                }
-                </script>
+                 <input type="text" name="pronounsBox" id="pronounsBox" value="{{user.pronounsBox}}" placeholder="Pronouns" />
+        </div>
 
         <div class="field">
           <label>Academic Standing</label>
