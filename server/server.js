@@ -9,8 +9,6 @@ Meteor.methods({
   getSenderUni: function(id) {
     var convertAsyncToSync  = Meteor.wrapAsync(function(id) {
       var user = PeopleCollection.findOne({owner: id});
-      //console.log("in function");
-      //console.log(user['uni']);
       result = user['uni'];
     }),
       resultOfAsyncToSync = convertAsyncToSync(id, {} );
@@ -74,7 +72,6 @@ Meteor.methods({
                                       school: userToMove.school,
                                       year: userToMove.year,
                                       major: userToMove.major,
-                                      pronouns: userToMove.pronouns,
                                       pronounsBox: userToMove.pronounsBox,
                                       about: userToMove.about,
                                       likes: userToMove.likes,
@@ -106,7 +103,6 @@ Meteor.methods({
                                school,
                                year,
                                major,
-                               pronouns,
                                pronounsBox,
                                about,
                                likes,
@@ -134,7 +130,6 @@ Meteor.methods({
                                     school: school,
                                     year: year,
                                     major: major,
-                                    pronouns: pronouns,
                                     pronounsBox: pronounsBox,
                                     about: about,
                                     likes: likes,
@@ -166,7 +161,6 @@ Meteor.methods({
                                                           school: userToMove.school,
                                                           year: userToMove.year,
                                                           major: userToMove.major,
-                                                          pronouns: userToMove.pronouns,
                                                           pronounsBox: userToMove.pronounsBox,
                                                           about: userToMove.about,
                                                           likes: userToMove.likes,
