@@ -41,57 +41,59 @@
   </div>
 </template>
 
+<!-- Show the user profiles as card on the home page -->
 <template name="people">
   <div class="people-home">
-        <div class="searchbox">
-    <h3 class="ui header">Search for Columbia students to meet</h3>
-    {{> EasySearch.Input index=peopleIndex attributes=inputAttributes }}
-  </div>
-    <!-- <div class="ui accordion"> -->
-      <div class="ui four column doubling stackable grid container">
-        {{#EasySearch.Each index=peopleIndex }}
-        <div class="five wide column">
-          <div id="contact" class="ui raised segment person">
+    <div class="searchbox">
+      <h3 class="ui header">Search for Columbia students to meet</h3>
+      <!-- Allow all fields of all profiles to be searched -->
+      {{> EasySearch.Input index=peopleIndex attributes=inputAttributes }}
+    </div>
+    <div class="ui four column doubling stackable grid container">
 
-            <!--<div class="title">-->
-              <div class="ui centered grid">
-                {{#if makeVisible}}
-                <div class="row">
-                  <img src="{{image}}" class="profilepic ui rounded image"/>
-                </div>
-                {{else}}
-                <div class="row">
-                 <img src="/img/roaree.jpg" class="profilepic ui rounded image"/>
-                </div>
-                {{/if}}
-                <div class="row">
-                  <h2 class="name">{{name}}</h2>
-                </div>
+      <!-- For each profile, fill this template -->
+      {{#EasySearch.Each index=peopleIndex }}
+      <div class="five wide column">
+        <div id="contact" class="ui raised segment person">
+          <div class="ui centered grid">
+            {{#if makeVisible}}
+              <div class="row">
+                <img src="{{image}}" class="profilepic ui rounded image"/>
               </div>
-            <!--</div>-->
-
-            
+            {{else}}
+              <div class="row">
+                <img src="/img/roaree.jpg" class="profilepic ui rounded image"/>
+              </div>
+            {{/if}}
+            <div class="row">
+              <h2 class="name">{{name}}</h2>
+            </div>
           </div>
         </div>
-        {{/EasySearch.Each}}
       </div>
+      {{/EasySearch.Each}}
+    </div>
 
-      {{> EasySearch.LoadMore index=peopleIndex attributes=loadButtonAttributes count=12}}
+    {{> EasySearch.LoadMore index=peopleIndex attributes=loadButtonAttributes count=12}}
 
-      {{#EasySearch.IfNoResults index=peopleIndex}}
+    {{#EasySearch.IfNoResults index=peopleIndex}}
       <div class="no-results">No results found</div>
-      {{/EasySearch.IfNoResults}}
-
-    <!--</div>-->
+    {{/EasySearch.IfNoResults}}
   </div>
+  <!-- Allow modals to be used in this template -->
   {{> uniPrompt}}
 </template>
 
+<!-- Template defines modals which appear when a profile card is pressed -->
 <template name="uniPrompt">
+
+<!--   First modal shows the profile
+  getUserProperty(String property) passes information from the Template.people > Session > this template -->
   <div class="ui coupled first modal">
     <div class="header">
       {{getUserProperty "name"}}
     </div>
+<!--     if profile is public, fill all available fields -->
     {{#if getUserProperty "make_public"}}
       <div class="image scrolling content">
         <div class="ui large image">    
@@ -130,6 +132,8 @@
               {{/if}}
         </div>
       </div>
+
+<!--     if the profile is private, show default   -->
     {{else}}
     <div class="image content">
       <div class="ui medium image">
@@ -142,6 +146,7 @@
     </div>
     {{/if}}
     <div class="actions">
+      <!-- if the user is not logged in, do not show the "Send Request button" -->
       {{#if currentUser}}
         <button id="cancel" class="ui negative button">Cancel</button>
         <button id="submitRequest" class="ui primary button">Send Request</button>
@@ -150,7 +155,8 @@
       {{/if}}
     </div>
   </div>
-
+  
+<!-- Second modal sens the Coffee request -->
   <div class="ui coupled second modal">
       <div class="header">Enter a message to go along with your request.</div>
     <div class="content">
