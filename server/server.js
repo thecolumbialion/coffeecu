@@ -40,7 +40,7 @@ Meteor.methods({
 
     if (senderUni != null) {
       // Check UNI cache first
-
+      console.log("senderUni" + senderUni);
       var uni_details = UniCollection.find({ uni: senderUni }).fetch();
       // If in cache, use that first
       if (uni_details.length > 0) {
@@ -56,6 +56,8 @@ Meteor.methods({
           SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
       }
       return "Email sent to " + receiverName;
+    }else{
+      return "You must be logged in to send CoffeeRequests!"
     }
   },
   rejectPendingUser: function (id, reason) {

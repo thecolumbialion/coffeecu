@@ -47,13 +47,13 @@
     <h3 class="ui header">Search for Columbia students to meet</h3>
     {{> EasySearch.Input index=peopleIndex attributes=inputAttributes }}
   </div>
-    <div class="ui accordion">
+    <!-- <div class="ui accordion"> -->
       <div class="ui four column doubling stackable grid container">
         {{#EasySearch.Each index=peopleIndex }}
         <div class="five wide column">
-          <div class="ui raised segment person">
+          <div id="contact" class="ui raised segment person">
 
-            <div class="title">
+            <!--<div class="title">-->
               <div class="ui centered grid">
                 {{#if makeVisible}}
                 <div class="row">
@@ -62,58 +62,15 @@
                 {{else}}
                 <div class="row">
                  <img src="/img/roaree.jpg" class="profilepic ui rounded image"/>
-               </div>
+                </div>
                 {{/if}}
                 <div class="row">
                   <h2 class="name">{{name}}</h2>
                 </div>
               </div>
-            </div>
+            <!--</div>-->
 
-            <div class="content">
-              {{#if makeVisible}}
-              <p>{{school}} {{year}}</p>
-              <p><b>Studies:</b> {{major}}</p>
-              {{#if pronouns}}
-              <p><b>Pronouns:</b> {{pronouns}}</p>
-              {{/if}}
-              {{#if pronounsBox}}
-              <p><b>Pronouns:</b> {{pronounsBox}}</p>
-              {{/if}}
-              <p><b>About:</b> {{about}}</p>
-              <p><b>Likes:</b> {{likes}}</p>
-              <p><b>Contact me for:</b> {{contactfor}}</p>
-              <p><b>Availability:</b> {{availability}}</p>
-              {{#if facebook}}
-              <a target="_blank" class="ui facebook button" href="{{facebook}}"><i class="facebook icon"></i></a>
-              {{/if}}
-              {{#if twitter}}
-              <a target="_blank" class="ui twitter button" href="{{twitter}}"><i class="twitter icon"></i ></a>
-              {{/if}}
-              {{#if linkedin}}
-              <a target="_blank" class="ui linkedin button" href="{{linkedin}}"><i class="linkedin icon"></i></a>
-              {{/if}}
-              {{#if website}}
-              <a target="_blank" class="ui cloud button" href="{{website}}"><i class="cloud icon"></i ></a>
-              {{/if}}
-
-              <!-- If user is logged in, allow them to see the Grab Coffee button -->
-              {{#if currentUser }}
-                  <div class="ui center aligned contact-button">
-                <button id="contact" class="waves-effect waves-light btn">Grab coffee</button>
-              </div>
-              <!-- If user is not logged in, tell them to sign in instead (we need to be able to pull their uni) -->
-              {{else}}
-              <br><br>
-              <b>You're not currently logged in.</b> <p>To send coffee requests, please <a href="/login">sign in</a> with your Columbia email address.</p>
-              {{/if}}
-              <!-- If account is marked as private, make sure sign in to see information -->
-              {{else}}
-              <b>This profile is private. </b> <p>To learn more about this person, please sign in with your Columbia email address.</p>
-
-              {{/if}}
-            </div>
-
+            
           </div>
         </div>
         {{/EasySearch.Each}}
@@ -125,13 +82,79 @@
       <div class="no-results">No results found</div>
       {{/EasySearch.IfNoResults}}
 
-    </div>
+    <!--</div>-->
   </div>
-  {{> uniPrompt }}
+  {{> uniPrompt}}
 </template>
 
 <template name="uniPrompt">
-  <div class="ui modal">
+  <div class="ui coupled first modal">
+    <div class="header">
+      {{getUserProperty "name"}}
+    </div>
+    {{#if getUserProperty "make_public"}}
+      <div class="image content">
+        <div class="ui medium image">    
+          <img src='{{getUserProperty "image"}}'>
+        </div>
+        <div class="description">
+          <div class="ui header"> Learn more about {{getUserProperty "name"}}</div>
+              <p>{{getUserProperty "school"}} {{getUserProperty "year"}}</p>
+              <p><b>Studies:</b> {{getUserProperty "major"}}</p>
+              {{#if getUserProperty "pronouns"}}
+                <p><b>Pronouns:</b> {{getUserProperty "pronouns"}}</p>
+              {{/if}}
+              {{#if getUserProperty "pronounsBox"}}
+                <p><b>Pronouns:</b> {{getUserProperty "pronounsBox"}}</p>
+              {{/if}}
+              <p><b>About:</b> {{getUserProperty "about"}}</p>
+              <p><b>Likes:</b> {{getUserProperty "likes"}}</p>
+              <p><b>Contact me for:</b> {{getUserProperty "contactfor"}}</p>
+              <p><b>Availability:</b> {{getUserProperty "availability"}}</p>
+              {{#if getUserProperty "facebook"}}
+                <a target="_blank" class="ui facebook button" href="{{getUserProperty "facebook"}}"><i class="facebook icon"></i></a>
+              {{/if}}
+              {{#if getUserProperty "twitter"}}
+                <a target="_blank" class="ui twitter button" href="{{getUserProperty "twitter"}}"><i class="twitter icon"></i ></a>
+              {{/if}}
+              {{#if getUserProperty linkedin}}
+                <a target="_blank" class="ui linkedin button" href="{{getUserProperty "linkedin"}}"><i class="linkedin icon"></i></a>
+              {{/if}}
+              {{#if getUserProperty "website"}}
+                <a target="_blank" class="ui cloud button" href="{{getUserProperty "website"}}"><i class="cloud icon"></i ></a>
+              {{/if}}
+
+              <!-- If user is logged in, allow them to see the Grab Coffee button -->
+              {{#if currentUser }}
+                <div class="ui center aligned contact-button">
+                 <!--<button id="contact" class="waves-effect waves-light btn">Grab coffee</button>-->
+                </div>
+                <!-- If user is not logged in, tell them to sign in instead (we need to be able to pull their uni) -->
+              {{else}}
+                <br><br>
+                <b>You're not currently logged in.</b> <p>To send coffee requests, please <a href="/login">sign in</a> with your Columbia email address.</p>
+              {{/if}}
+                
+        </div>
+      </div>
+    {{else}}
+    <div class="image content">
+      <div class="ui medium image">
+        <img src="/img/roaree.jpg">
+      </div>
+      <div class="description">
+        <div class="ui header">This profile is private</div>
+        <b>This profile is private. </b> <p>To learn more about this person, please sign in with your Columbia email address.</p>
+      </div>
+    </div>
+    {{/if}}
+    <div class="actions">
+      <button id="cancel" class="ui negative button">Cancel</button>
+      <button id="submitRequest" class="ui primary button">Send Request</button>
+    </div>
+  </div>
+
+  <div class="ui coupled second modal">
       <div class="header">Enter a message to go along with your request.</div>
     <div class="content">
       <div class="field">

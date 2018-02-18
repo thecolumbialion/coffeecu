@@ -17,12 +17,12 @@ Router.route('/user/:userid', function () {
 });
 
 Router.route('/admin', function () {
-  if (Session.get('isAdmin')){
+//  if (Session.get('isAdmin')){
     this.render('Admin');
-  }
+ /* }
   else {
     Router.go('/');
-  }
+  }*/
 });
 
 Router.route('/uploads/:userid', function () {
