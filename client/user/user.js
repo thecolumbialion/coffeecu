@@ -55,15 +55,6 @@ Template.profileupdate.rendered = function () {
           }
         ]
       },
-      pronouns: {
-        identifier  : 'pronouns',
-        optional: true,
-        rules: [
-          {
-            type   : 'empty'
-          }
-        ]
-      },
       pronounsBox: {
         identifier  : 'pronounsBox',
         optional: true,
@@ -245,10 +236,7 @@ Template.profileupdate.events({
     var school = event.target.school.value;
     var year = event.target.year.value;
     var major = event.target.major.value;
-    var pronouns = event.target.pronouns.value;
-    console.log("pronouns: " + pronouns);
     var pronounsBox = event.target.pronounsBox.value;
-    console.log("pronounsBox: " + pronounsBox);
     var about = event.target.about.value;
     var likes = event.target.likes.value;
     var contactfor = event.target.contactfor.value;
@@ -274,7 +262,6 @@ Template.profileupdate.events({
                 school,
                 year,
                 major,
-                pronouns,
                 pronounsBox,
                 about,
                 likes,

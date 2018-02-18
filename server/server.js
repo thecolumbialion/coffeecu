@@ -9,8 +9,6 @@ Meteor.methods({
   getSenderUni: function(id) {
     var convertAsyncToSync  = Meteor.wrapAsync(function(id) {
       var user = PeopleCollection.findOne({owner: id});
-      //console.log("in function");
-      //console.log(user['uni']);
       result = user['uni'];
     }),
       resultOfAsyncToSync = convertAsyncToSync(id, {} );
@@ -45,16 +43,18 @@ Meteor.methods({
       // If in cache, use that first
       if (uni_details.length > 0) {
         senderName = uni_details[0].name;
-
+          
         this.unblock();
         SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
-
+          
+      }
+      else {
           this.unblock();
           var senderName = GetFirstName(senderUni);
           UniCollection.insert({uni: senderUni, name: senderName});
 
           SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
-      }
+      } 
       return "Email sent to " + receiverName;
     }else{
       return "You must be logged in to send CoffeeRequests!"
@@ -76,7 +76,6 @@ Meteor.methods({
                                       school: userToMove.school,
                                       year: userToMove.year,
                                       major: userToMove.major,
-                                      pronouns: userToMove.pronouns,
                                       pronounsBox: userToMove.pronounsBox,
                                       about: userToMove.about,
                                       likes: userToMove.likes,
@@ -108,7 +107,6 @@ Meteor.methods({
                                school,
                                year,
                                major,
-                               pronouns,
                                pronounsBox,
                                about,
                                likes,
@@ -136,7 +134,6 @@ Meteor.methods({
                                     school: school,
                                     year: year,
                                     major: major,
-                                    pronouns: pronouns,
                                     pronounsBox: pronounsBox,
                                     about: about,
                                     likes: likes,
@@ -168,7 +165,6 @@ Meteor.methods({
                                                           school: userToMove.school,
                                                           year: userToMove.year,
                                                           major: userToMove.major,
-                                                          pronouns: userToMove.pronouns,
                                                           pronounsBox: userToMove.pronounsBox,
                                                           about: userToMove.about,
                                                           likes: userToMove.likes,
@@ -245,10 +241,8 @@ var SendEmail = function (to, replyTo, cc, from, subject, body) {
   });
 };
 
-var GetFirstName = function (uni) {
-  var convertAsyncToSync  = Meteor.wrapAsync(HTTP.get),
-    resultOfAsyncToSync = convertAsyncToSync('http://uniatcu.herokuapp.com/info?uni=' + uni, {});
-  var firstname = resultOfAsyncToSync.data.data.name.split(' ')[0];
+var GetFirstName = function (senderUni) {
+  var firstname = PeopleCollection.findOne({uni: senderUni}).name.split(' ').slice(0, -1).join(" ");
   return firstname;
 };
 
