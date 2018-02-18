@@ -43,16 +43,18 @@ Meteor.methods({
       // If in cache, use that first
       if (uni_details.length > 0) {
         senderName = uni_details[0].name;
-
+          
         this.unblock();
         SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
-
+          
+      }
+      else {
           this.unblock();
           var senderName = GetFirstName(senderUni);
           UniCollection.insert({uni: senderUni, name: senderName});
 
           SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
-      }
+      } 
       return "Email sent to " + receiverName;
     }
   },
@@ -237,10 +239,8 @@ var SendEmail = function (to, replyTo, cc, from, subject, body) {
   });
 };
 
-var GetFirstName = function (uni) {
-  var convertAsyncToSync  = Meteor.wrapAsync(HTTP.get),
-    resultOfAsyncToSync = convertAsyncToSync('http://uniatcu.herokuapp.com/info?uni=' + uni, {});
-  var firstname = resultOfAsyncToSync.data.data.name.split(' ')[0];
+var GetFirstName = function (senderUni) {
+  var firstname = PeopleCollection.findOne({uni: senderUni}).name.split(' ').slice(0, -1).join(" ");
   return firstname;
 };
 
