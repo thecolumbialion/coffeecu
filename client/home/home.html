@@ -93,8 +93,8 @@
       {{getUserProperty "name"}}
     </div>
     {{#if getUserProperty "make_public"}}
-      <div class="image content">
-        <div class="ui medium image">    
+      <div class="image scrolling content">
+        <div class="ui large image">    
           <img src='{{getUserProperty "image"}}'>
         </div>
         <div class="description">
@@ -109,29 +109,25 @@
               <p><b>Contact me for:</b> {{getUserProperty "contactfor"}}</p>
               <p><b>Availability:</b> {{getUserProperty "availability"}}</p>
               {{#if getUserProperty "facebook"}}
-                <a target="_blank" class="ui facebook button" href="{{getUserProperty "facebook"}}"><i class="facebook icon"></i></a>
+                <button class="ui facebook icon button">
+                  <a target="_blank" href="{{getUserProperty "facebook"}}"> <i class="facebook icon"></i></a>
+                </button>
               {{/if}}
               {{#if getUserProperty "twitter"}}
-                <a target="_blank" class="ui twitter button" href="{{getUserProperty "twitter"}}"><i class="twitter icon"></i ></a>
+                <button class="ui twitter icon button">
+                  <a target="_blank" href="{{getUserProperty "twitter"}}"> <i class="twitter icon"></i></a>
+                </button>
               {{/if}}
               {{#if getUserProperty linkedin}}
-                <a target="_blank" class="ui linkedin button" href="{{getUserProperty "linkedin"}}"><i class="linkedin icon"></i></a>
+                <button class="ui linkedin icon button">
+                  <a target="_blank" href="{{getUserProperty "linkedin"}}"> <i class="linkedin icon"></i></a>
+                </button>
               {{/if}}
               {{#if getUserProperty "website"}}
-                <a target="_blank" class="ui cloud button" href="{{getUserProperty "website"}}"><i class="cloud icon"></i ></a>
+                <button class="ui icon button">
+                  <a target="_blank" href="{{getUserProperty "website"}}"> <i class="cloud icon"></i></a>
+                </button>
               {{/if}}
-
-              <!-- If user is logged in, allow them to see the Grab Coffee button -->
-              {{#if currentUser }}
-                <div class="ui center aligned contact-button">
-                 <!--<button id="contact" class="waves-effect waves-light btn">Grab coffee</button>-->
-                </div>
-                <!-- If user is not logged in, tell them to sign in instead (we need to be able to pull their uni) -->
-              {{else}}
-                <br><br>
-                <b>You're not currently logged in.</b> <p>To send coffee requests, please <a href="/login">sign in</a> with your Columbia email address.</p>
-              {{/if}}
-                
         </div>
       </div>
     {{else}}
@@ -146,8 +142,12 @@
     </div>
     {{/if}}
     <div class="actions">
-      <button id="cancel" class="ui negative button">Cancel</button>
-      <button id="submitRequest" class="ui primary button">Send Request</button>
+      {{#if currentUser}}
+        <button id="cancel" class="ui negative button">Cancel</button>
+        <button id="submitRequest" class="ui primary button">Send Request</button>
+      {{else}}
+        <button id="cancel" class="ui negative button"> You must sign in to grab coffee</button>
+      {{/if}}
     </div>
   </div>
 
