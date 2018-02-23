@@ -15,13 +15,13 @@ Meteor.methods({
     return resultOfAsyncToSync;
   },
 
-  processSendRequest: function (senderId, receiver, receiverUni, receiverName, additionalMessage, recaptcha) {
+  processSendRequest: function (sender, receiver, receiverUni, receiverName, additionalMessage, recaptcha) {
     // Check recaptcha
     if(!reCAPTCHA.verifyCaptcha(this.connection.clientAddress, recaptcha)) {
       return "We're not sending that request since we suspect that you're a robot";
     }
 
-    var senderUni = PeopleCollection.findOne({owner: senderId})['uni'];
+    var senderUni = PeopleCollection.findOne({owner: sender })['uni'];
     if (senderUni == receiverUni){
       return "Cannot send a coffee request to yourself";
     }
@@ -35,27 +35,14 @@ Meteor.methods({
     }
 
     var receiverEmail = PeopleCollection.findOne({ owner: receiver }).username;
+    var senderEmail = PeopleCollection.findOne({ owner: sender }).username;
 
     if (senderUni != null) {
-      // Check UNI cache first
-
-      var uni_details = UniCollection.find({ uni: senderUni }).fetch();
-      // If in cache, use that first
-      if (uni_details.length > 0) {
-        senderName = uni_details[0].name;
-          
         this.unblock();
-        SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
-          
-      }
-      else {
-          this.unblock();
-          var senderName = GetFirstName(senderUni);
-          UniCollection.insert({uni: senderUni, name: senderName});
+        var senderName = GetFirstName(senderUni);
 
-          SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
-      } 
-      return "Email sent to " + receiverName;
+        SendEmailForCoffee(senderUni, senderEmail, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
+        return "Email sent to " + receiverName;
     }
   },
   rejectPendingUser: function (id, reason) {
@@ -210,10 +197,10 @@ SyncedCron.add({
   }
 });
 
-var SendEmailForCoffee = function (senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage) {
+var SendEmailForCoffee = function (senderUni, senderEmail, senderName, receiverUni, receiverEmail, receiverName, additionalMessage) {
   var to = receiverEmail;
-  var replyTo = receiverEmail;
-  var cc = senderUni + '@columbia.edu';
+  var replyTo = senderEmail;
+  var cc = senderEmail;
   var from = 'do-not-reply@coffeecu.com';
   var subject = 'Coffee@CU: Request from ' + senderName;
   var body = "Hi " + receiverName + ",\n\n" +
@@ -240,7 +227,7 @@ var SendEmail = function (to, replyTo, cc, from, subject, body) {
 };
 
 var GetFirstName = function (senderUni) {
-  var firstname = PeopleCollection.findOne({uni: senderUni}).name.split(' ').slice(0, -1).join(" ");
+  var firstname = PeopleCollection.findOne({uni: senderUni}).name.split(' ').slice(0, -1).join(' ');
   return firstname;
 };
 
