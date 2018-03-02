@@ -96,7 +96,7 @@
 <!--     if profile is public, fill all available fields -->
     {{#if getUserProperty "make_public"}}
       <div class="image scrolling content">
-        <div class="ui large image">    
+        <div class="ui large image">
           <img src='{{getUserProperty "image"}}'>
         </div>
         <div class="description">
@@ -146,16 +146,16 @@
     </div>
     {{/if}}
     <div class="actions">
-      <!-- if the user is not logged in, do not show the "Send Request button" -->
+      <!-- if the user is not logged in, do not show the "Grab Coffee button" -->
       {{#if currentUser}}
         <button id="cancel" class="ui negative button">Cancel</button>
-        <button id="submitRequest" class="ui primary button">Send Request</button>
+        <button id="submitRequest" class="ui primary button">Grab Coffee</button>
       {{else}}
         <button id="cancel" class="ui negative button"> You must sign in to grab coffee</button>
       {{/if}}
     </div>
   </div>
-  
+
 <!-- Second modal sens the Coffee request -->
   <div class="ui coupled second modal">
       <div class="header">Enter a message to go along with your request.</div>
