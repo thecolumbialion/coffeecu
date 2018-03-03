@@ -6,15 +6,24 @@ Meteor.methods({
     return MeetingsCollection.find().fetch().length;
   },
 
-  getSenderUni: function(id) {
-    var convertAsyncToSync  = Meteor.wrapAsync(function(id) {
-      var user = PeopleCollection.findOne({owner: id});
-      result = user['uni'];
-    }),
-      resultOfAsyncToSync = convertAsyncToSync(id, {} );
-    return resultOfAsyncToSync;
-  },
+  /* Explanation of variable names
+  sender and receiver are primary keys
+  senderName and receiverName are first names
+  senderUni and receiverUni are the part of emails before the @ (e.g. uni1234 or so firstname.lastname)
+  sender and receiver are userDoc._id
+  senderName and receiverName are obtained from userDoc.name
+  senderUni and receiverUni are userDoc.uni
+  userDoc.uni isn't always an actual uni
+  because it's made from the emails people sign up with and many people choose aliases
+  the variable names will make more sense in the near future when
+  1) we switch to only OAUTH for login, which will force new accounts to be made with unis
+  2) we update the existing acounts so every userObject.uni is actually a uni
 
+  remaining mysteries: why is the user with a given id accessed with findOne({owner: x })?
+  1) x = Meteor.userId = userDoc._id = primary key everywhere I (Sanford) have looked
+  2) owner is not a Meteor or a Mongo concept
+  3) the total number of owners in PeopleCollection is less than the total number of ids
+   */
   processSendRequest: function (sender, receiver, receiverUni, receiverName, additionalMessage, recaptcha) {
     // Check recaptcha
     if(!reCAPTCHA.verifyCaptcha(this.connection.clientAddress, recaptcha)) {
@@ -135,46 +144,46 @@ Meteor.methods({
                                   {upsert: true});
                                   RejectedPeopleCollection.remove({ owner: id });
                               },
-                              moveUserToMaster: function (id) {
-                                // Only admin can move user to master
-                                if (!IsAdmin(Meteor.userId())) {
-                                  return;
-                                }
-                                var userToMove = PendingPeopleCollection.findOne({owner: id});
-                                PeopleCollection.update({ owner: id },
-                                                        {$set: {
-                                                          owner: id,
-                                                          username: userToMove.username,
-                                                          name: userToMove.name,
-                                                          uni: userToMove.uni,
-                                                          school: userToMove.school,
-                                                          year: userToMove.year,
-                                                          major: userToMove.major,
-                                                          pronounsBox: userToMove.pronounsBox,
-                                                          about: userToMove.about,
-                                                          likes: userToMove.likes,
-                                                          contactfor: userToMove.contactfor,
-                                                          availability: userToMove.availability,
-                                                          twitter: userToMove.twitter,
-                                                          facebook: userToMove.facebook,
-                                                          linkedin: userToMove.linkedin,
-                                                          website: userToMove.website,
-                                                          make_public: userToMove.make_public,
-                                                          image: userToMove.image,
-                                                          random_sort: userToMove.random_sort
-                                                        }},
-                                                        {upsert: true});
-                                                        PendingPeopleCollection.remove({owner: id});
-                                                        RejectedPeopleCollection.remove({owner: id});
-                              },
-                              deleteUser: function (id) {
-                                if (!IsAdmin(Meteor.userId()) && id != Meteor.userId()) {
-                                  throw new Meteor.Error('not-authorized');
-                                }
-                                PeopleCollection.remove({ owner: id });
-                                PendingPeopleCollection.remove({ owner: id });
-                                RejectedPeopleCollection.remove({ owner: id });
-                              }
+  moveUserToMaster: function (id) {
+    // Only admin can move user to master
+    if (!IsAdmin(Meteor.userId())) {
+      return;
+    }
+    var userToMove = PendingPeopleCollection.findOne({owner: id});
+    PeopleCollection.update({ owner: id },
+                            {$set: {
+                              owner: id,
+                              username: userToMove.username,
+                              name: userToMove.name,
+                              uni: userToMove.uni,
+                              school: userToMove.school,
+                              year: userToMove.year,
+                              major: userToMove.major,
+                              pronounsBox: userToMove.pronounsBox,
+                              about: userToMove.about,
+                              likes: userToMove.likes,
+                              contactfor: userToMove.contactfor,
+                              availability: userToMove.availability,
+                              twitter: userToMove.twitter,
+                              facebook: userToMove.facebook,
+                              linkedin: userToMove.linkedin,
+                              website: userToMove.website,
+                              make_public: userToMove.make_public,
+                              image: userToMove.image,
+                              random_sort: userToMove.random_sort
+                            }},
+                            {upsert: true});
+                            PendingPeopleCollection.remove({owner: id});
+                            RejectedPeopleCollection.remove({owner: id});
+  },
+  deleteUser: function (id) {
+    if (!IsAdmin(Meteor.userId()) && id != Meteor.userId()) {
+      throw new Meteor.Error('not-authorized');
+    }
+    PeopleCollection.remove({ owner: id });
+    PendingPeopleCollection.remove({ owner: id });
+    RejectedPeopleCollection.remove({ owner: id });
+  }
 });
 
 SyncedCron.add({
