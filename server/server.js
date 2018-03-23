@@ -48,7 +48,7 @@ Meteor.methods({
 
     if (senderUni != null) {
         this.unblock();
-        var senderName = GetFirstName(senderUni);
+        var senderName = PeopleCollection.findOne({uni: senderUni}).name;
 
         SendEmailForCoffee(senderUni, senderEmail, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
         return "Email sent to " + receiverName;
@@ -233,11 +233,6 @@ var SendEmail = function (to, replyTo, cc, from, subject, body) {
     subject: subject,
     text: body
   });
-};
-
-var GetFirstName = function (senderUni) {
-  var firstname = PeopleCollection.findOne({uni: senderUni}).name.split(' ').slice(0, -1).join(' ');
-  return firstname;
 };
 
 var LogMeeting = function(senderUni, receiverUni) {
