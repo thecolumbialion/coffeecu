@@ -68,7 +68,7 @@ Template.people.helpers({
 
 Template.people.events({
   'click #contact': function () {
-    Session.set('currentlySelected', { owner: this.owner, uni: this.uni, name: this.name.split(' ').slice(0, -1).join(' ')});
+    Session.set('currentlySelected', {owner: this.owner, uni: this.uni, name: this.name});
     $('.ui.modal').modal({
       onApprove: function(event) {
         var receiver = Session.get('currentlySelected').owner;
