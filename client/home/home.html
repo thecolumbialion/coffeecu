@@ -96,7 +96,7 @@
 <!--     if profile is public, fill all available fields -->
     {{#if getUserProperty "make_public"}}
       <div class="image scrolling content">
-        <div class="ui large image">
+        <div class="ui tiny bordered image">
           <img src='{{getUserProperty "image"}}'>
         </div>
         <div class="description">
@@ -112,22 +112,22 @@
               <p><b>Availability:</b> {{getUserProperty "availability"}}</p>
               {{#if getUserProperty "facebook"}}
                 <button class="ui facebook icon button">
-                  <a target="_blank" href="{{getUserProperty "facebook"}}"> <i class="facebook icon"></i></a>
+                  <a target="_blank" href='{{getUserProperty "facebook"}}'> <i class="facebook icon"></i></a>
                 </button>
               {{/if}}
               {{#if getUserProperty "twitter"}}
                 <button class="ui twitter icon button">
-                  <a target="_blank" href="{{getUserProperty "twitter"}}"> <i class="twitter icon"></i></a>
+                  <a target="_blank" href='{{getUserProperty "twitter"}}'> <i class="twitter icon"></i></a>
                 </button>
               {{/if}}
-              {{#if getUserProperty linkedin}}
+              {{#if getUserProperty "linkedin"}}
                 <button class="ui linkedin icon button">
-                  <a target="_blank" href="{{getUserProperty "linkedin"}}"> <i class="linkedin icon"></i></a>
+                  <a target="_blank" href='{{getUserProperty "linkedin"}}'> <i class="linkedin icon"></i></a>
                 </button>
               {{/if}}
               {{#if getUserProperty "website"}}
                 <button class="ui icon button">
-                  <a target="_blank" href="{{getUserProperty "website"}}"> <i class="cloud icon"></i></a>
+                  <a target="_blank" href='{{getUserProperty "website"}}'> <i class="cloud icon"></i></a>
                 </button>
               {{/if}}
         </div>
@@ -136,7 +136,7 @@
 <!--     if the profile is private, show default   -->
     {{else}}
     <div class="image content">
-      <div class="ui medium image">
+      <div class="ui tiny bordered image">
         <img src="/img/roaree.jpg">
       </div>
       <div class="description">
