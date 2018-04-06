@@ -2,31 +2,37 @@
   <nav class="blue lighten-2">
     <div class="nav-wrapper">
       <div class="ui container">
-        <ul id="nav-mobile" class="right">
-          <li>
-            <a href="https://www.facebook.com/coffeeatcolumbia" title="Facebook"><i class="material-icons">thumb_up</i></a>
-          </li>
-          <li>
-            <a href="mailto:coffeecu@adicu.com?subject=Coffee@CU Question" title="Contact Us">
-              <i class="material-icons">mail</i></a>
-          </li>
-          <li>
-            <a href="/" title="Home"><i class="material-icons">home</i></a>
+        <ul id="nav-mobile">
+          <li class="searchbox">
+            {{> EasySearch.Input index=peopleIndex attributes=inputAttributes }}
           </li>
 
-          {{#if currentUser}}
-          <li>
-            {{> userprofile}}
-          </li>
-          {{/if}}
-
-          <li>
+          <li class="right">
             {{#if currentUser}}
             {{> logout}}
             {{else}}
             <a href="/login">Sign In</a>
             {{/if}}
-          </li>     
+          </li>
+
+          {{#if currentUser}}
+          <li class="right">
+            {{> userprofile}}
+          </li>
+          {{/if}}
+
+          <li class="right">
+            <a href="/" title="Home"><i class="material-icons">home</i></a>
+          </li>
+
+          <li class="right">
+            <a href="mailto:coffeecu@adicu.com?subject=Coffee@CU Question" title="Contact Us">
+              <i class="material-icons">mail</i></a>
+          </li>
+
+          <li class="right">
+            <a href="https://www.facebook.com/coffeeatcolumbia" title="Facebook"><i class="material-icons">thumb_up</i></a>
+          </li>
         </ul>
       </div>
     </div>
