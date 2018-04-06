@@ -69,7 +69,6 @@ Template.people.helpers({
 
 Template.people.events({
   'click #contact': function () {
-
     for (property in this){
       console.log(property);
     }

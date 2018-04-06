@@ -68,6 +68,7 @@ Meteor.methods({
       return "Email sent to " + receiverName;
     }else{
       return "You must be logged in to send CoffeeRequests!";
+
     }
   },
   rejectPendingUser: function (id, reason) {

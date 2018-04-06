@@ -1,4 +1,3 @@
-UniCollection = new Mongo.Collection('uni');
 MeetingsCollection = new Mongo.Collection('meetings');
 BlacklistCollection = new Mongo.Collection('blacklist');
 
