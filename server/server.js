@@ -86,13 +86,13 @@ Meteor.methods({
                                     {upsert: true});
                                     PendingPeopleCollection.remove({ owner: id });
 
-                                    // Send email
-                                    var to = userToMove.username;
-                                    var from = 'do-not-reply@coffeecu.com';
-                                    var subject = 'Coffee@CU: Profile update declined';
-                                    var body = "Hi,\n\n" +
-                                      "Your recent profile update request to Coffee@CU was rejected.\n\nReason: " + reason + "\n\nPlease make the above changes and request an update to your profile again at http://coffeecu.com.\n\nCheers,\nThe Coffee@CU Team ";
-                                    SendEmail(to, "", from, subject, body);
+    // Send email
+    var to = userToMove.username;
+    var from = 'do-not-reply@coffeecu.com';
+    var subject = 'Coffee@CU: Profile update declined';
+    var body = "Hi,\n\n" +
+      "Your recent profile update request to Coffee@CU was rejected.\n\nReason: " + reason + "\n\nPlease make the above changes and request an update to your profile again at http://coffeecu.com.\n\nCheers,\nThe Coffee@CU Team ";
+    SendEmail(to, "", from, subject, body);
   },
   insertPendingUser: function (id,
                                username,
