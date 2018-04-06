@@ -53,24 +53,28 @@
 
       <!-- For each profile, fill this template -->
       {{#EasySearch.Each index=peopleIndex }}
+      {{#if makeVisible}}
       <div class="five wide column">
         <div id="contact" class="ui raised segment person">
           <div class="ui centered grid">
-            {{#if makeVisible}}
+            
               <div class="row">
                 <img src="{{image}}" class="profilepic ui rounded image"/>
               </div>
-            {{else}}
-              <div class="row">
-                <img src="/img/roaree.jpg" class="profilepic ui rounded image"/>
-              </div>
-            {{/if}}
+
             <div class="row">
               <h2 class="name">{{name}}</h2>
             </div>
+<!-- 
+            {{else}}
+              <div class="row">
+                <img src="/img/roaree.jpg" class="profilepic ui rounded image"/>
+              </div> -->
+            
           </div>
         </div>
       </div>
+      {{/if}}
       {{/EasySearch.Each}}
     </div>
 
@@ -94,7 +98,6 @@
       {{getUserProperty "name"}}
     </div>
 <!--     if profile is public, fill all available fields -->
-    {{#if getUserProperty "make_public"}}
       <div class="image scrolling content">
         <div class="ui tiny bordered image">
           <img src='{{getUserProperty "image"}}'>
@@ -133,18 +136,7 @@
         </div>
       </div>
 
-<!--     if the profile is private, show default   -->
-    {{else}}
-    <div class="image content">
-      <div class="ui tiny bordered image">
-        <img src="/img/roaree.jpg">
-      </div>
-      <div class="description">
-        <div class="ui header">This profile is private</div>
-        <b>This profile is private. </b> <p>To learn more about this person, please sign in with your Columbia email address.</p>
-      </div>
-    </div>
-    {{/if}}
+
     <div class="actions">
       <!-- if the user is not logged in, do not show the "Grab Coffee button" -->
       {{#if currentUser}}

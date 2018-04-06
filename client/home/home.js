@@ -8,13 +8,12 @@ Tracker.autorun(function () {
   Meteor.subscribe('people-master');
 });
 
-//"currently selected" tracts the last profile clicked
 Session.set('currentlySelected', null);
 
 Template.people.rendered = function () {
   $(document).ready(function(){
+    $('.ui.accordion').accordion({exclusive: true});
 
-    //load more profile when the user scrolls to the bottom
     window.onscroll = function(ev) { if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
       setTimeout(function(){
         $('.load-more-button').click();
@@ -30,7 +29,6 @@ Template.intro.helpers({
   }
 });
 
-
 Template.meetingsMade.rendered = function () {
   // Update #meetings every second
   Meteor.setInterval(function () {
@@ -41,7 +39,6 @@ Template.meetingsMade.rendered = function () {
 };
 
 Template.meetingsMade.helpers({
-  //returns number of mealitings made
   'meetings': function () {
     return Session.get('meetings');
   }
@@ -71,19 +68,19 @@ Template.people.helpers({
 
 
 Template.people.events({
-  //when a profile is clicked
   'click #contact': function () {
 
-    Session.set('currentlySelected', this);
+    for (property in this){
+      console.log(property);
+    }
     
-    //show 2 modal
+    Session.set('currentlySelected', this);
+      
     $('.coupled.modal')
       .modal({
-        //make 2nd modal modal dependent on the first
         allowMultiple: false
       })
     ;
-
     // attach events to buttons
     $('.second.modal')
       .modal({
@@ -103,16 +100,16 @@ Template.people.events({
           });
             
           reCAPTCHA.reset("1");
-        }//omly connect primary button or else canceling 1st modal, cancels all photos
-      }).modal('attach events', '.first.modal .button.primary');
-    // show first modal
+        }
+      }).modal('attach events', '.first.modal .button.primary')
+    ;
+    
+    // show first now
     $('.first.modal').modal({name: Session.get('currentlySelected').name})
-      .modal('show')
-    ;  
+      .modal('show');
   }
 });
 
-//template for the modals
 Template.uniPrompt.helpers({
   getUserProperty(property){
     currentuser = Session.get("currentlySelected");
