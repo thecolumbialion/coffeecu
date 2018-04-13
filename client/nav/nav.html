@@ -1,8 +1,14 @@
 <template name="nav">
+  <div class="navbar-fixed">
   <nav class="blue lighten-2">
     <div class="nav-wrapper">
       <div class="ui container">
         <ul id="nav-mobile">
+
+          <li>
+            <a href="/" title="Search"><i class="material-icons">search</i></a>
+          </li>
+
           <li class="searchbox">
             {{> EasySearch.Input index=peopleIndex attributes=inputAttributes }}
           </li>
@@ -37,6 +43,7 @@
       </div>
     </div>
   </nav>
+</div>
 </template>
 
 <template name="logout">
