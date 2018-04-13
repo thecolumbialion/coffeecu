@@ -47,11 +47,28 @@ Meteor.methods({
     var senderEmail = PeopleCollection.findOne({ owner: sender }).username;
 
     if (senderUni != null) {
+      // Check UNI cache first
+      console.log("senderUni" + senderUni);
+      var uni_details = UniCollection.find({ uni: senderUni }).fetch();
+      // If in cache, use that first
+      if (uni_details.length > 0) {
+        senderName = uni_details[0].name;
+          
         this.unblock();
-        var senderName = PeopleCollection.findOne({uni: senderUni}).name;
+        SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
+          
+      }
+      else {
+          this.unblock();
+          var senderName = GetFirstName(senderUni);
+          UniCollection.insert({uni: senderUni, name: senderName});
 
-        SendEmailForCoffee(senderUni, senderEmail, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
-        return "Email sent to " + receiverName;
+          SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
+      } 
+      return "Email sent to " + receiverName;
+    }else{
+      return "You must be logged in to send CoffeeRequests!";
+
     }
   },
   rejectPendingUser: function (id, reason) {

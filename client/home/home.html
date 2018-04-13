@@ -41,90 +41,110 @@
   </div>
 </template>
 
+<!-- Show the user profiles as card on the home page -->
 <template name="people">
   <div class="people-home">
-    <div class="ui accordion">
-      <div class="ui four column doubling stackable grid container">
-        {{#EasySearch.Each index=peopleIndex }}
-        <div class="five wide column">
-          <div class="ui raised segment person">
+    <div class="ui four column doubling stackable grid container">
 
-            <div class="title">
-              <div class="ui centered grid">
-                {{#if makeVisible}}
-                <div class="row">
-                  <img src="{{image}}" class="profilepic ui rounded image"/>
-                </div>
-                {{else}}
-                <div class="row">
-                 <img src="/img/roaree.jpg" class="profilepic ui rounded image"/>
-               </div>
-                {{/if}}
-                <div class="row">
-                  <h2 class="name">{{name}}</h2>
-                </div>
+      <!-- For each profile, fill this template -->
+      {{#EasySearch.Each index=peopleIndex }}
+      {{#if makeVisible}}
+      <div class="five wide column">
+        <div id="contact" class="ui raised segment person">
+          <div class="ui centered grid">
+            
+              <div class="row">
+                <img src="{{image}}" class="profilepic ui rounded image"/>
               </div>
+
+            <div class="row">
+              <h2 class="name">{{name}}</h2>
             </div>
-
-            <div class="content">
-              {{#if makeVisible}}
-              <p>{{school}} {{year}}</p>
-              <p><b>Studies:</b> {{major}}</p>
-              {{#if pronounsBox}}
-              <p><b>Pronouns:</b> {{pronounsBox}}</p>
-              {{/if}}
-              <p><b>About:</b> {{about}}</p>
-              <p><b>Likes:</b> {{likes}}</p>
-              <p><b>Contact me for:</b> {{contactfor}}</p>
-              <p><b>Availability:</b> {{availability}}</p>
-              {{#if facebook}}
-              <a target="_blank" class="ui facebook button" href="{{facebook}}"><i class="facebook icon"></i></a>
-              {{/if}}
-              {{#if twitter}}
-              <a target="_blank" class="ui twitter button" href="{{twitter}}"><i class="twitter icon"></i ></a>
-              {{/if}}
-              {{#if linkedin}}
-              <a target="_blank" class="ui linkedin button" href="{{linkedin}}"><i class="linkedin icon"></i></a>
-              {{/if}}
-              {{#if website}}
-              <a target="_blank" class="ui cloud button" href="{{website}}"><i class="cloud icon"></i ></a>
-              {{/if}}
-
-              <!-- If user is logged in, allow them to see the Grab Coffee button -->
-              {{#if currentUser }}
-                  <div class="ui center aligned contact-button">
-                <button id="contact" class="waves-effect waves-light btn">Grab coffee</button>
-              </div>
-              <!-- If user is not logged in, tell them to sign in instead (we need to be able to pull their uni) -->
-              {{else}}
-              <br><br>
-              <b>You're not currently logged in.</b> <p>To send coffee requests, please <a href="/login">sign in</a> with your Columbia email address.</p>
-              {{/if}}
-              <!-- If account is marked as private, make sure sign in to see information -->
-              {{else}}
-              <b>This profile is private. </b> <p>To learn more about this person, please sign in with your Columbia email address.</p>
-
-              {{/if}}
-            </div>
-
+<!-- 
+            {{else}}
+              <div class="row">
+                <img src="/img/roaree.jpg" class="profilepic ui rounded image"/>
+              </div> -->
+            
           </div>
         </div>
-        {{/EasySearch.Each}}
       </div>
-
-      {{> EasySearch.LoadMore index=peopleIndex attributes=loadButtonAttributes count=12}}
-
-      {{#EasySearch.IfNoResults index=peopleIndex}}
-      <div class="no-results">No results found</div>
-      {{/EasySearch.IfNoResults}}
-
+      {{/if}}
+      {{/EasySearch.Each}}
     </div>
+
+    {{> EasySearch.LoadMore index=peopleIndex attributes=loadButtonAttributes count=12}}
+
+    {{#EasySearch.IfNoResults index=peopleIndex}}
+      <div class="no-results">No results found</div>
+    {{/EasySearch.IfNoResults}}
   </div>
-  {{> uniPrompt }}
+  <!-- Allow modals to be used in this template -->
+  {{> uniPrompt}}
 </template>
 
+<!-- Template defines modals which appear when a profile card is pressed -->
 <template name="uniPrompt">
-  <div class="ui modal">
+
+<!--   First modal shows the profile
+  getUserProperty(String property) passes information from the Template.people > Session > this template -->
+  <div class="ui coupled first modal">
+    <div class="header">
+      {{getUserProperty "name"}}
+    </div>
+<!--     if profile is public, fill all available fields -->
+      <div class="image scrolling content">
+        <div class="ui large bordered image">
+          <img src='{{getUserProperty "image"}}'>
+        </div>
+        <div class="description">
+          <div class="ui header"> Learn more about {{getUserProperty "name"}}</div>
+              <p>{{getUserProperty "school"}} {{getUserProperty "year"}}</p>
+              <p><b>Studies:</b> {{getUserProperty "major"}}</p>
+              {{#if getUserProperty "pronounsBox"}}
+                <p><b>Pronouns:</b> {{getUserProperty "pronounsBox"}}</p>
+              {{/if}}
+              <p><b>About:</b> {{getUserProperty "about"}}</p>
+              <p><b>Likes:</b> {{getUserProperty "likes"}}</p>
+              <p><b>Contact me for:</b> {{getUserProperty "contactfor"}}</p>
+              <p><b>Availability:</b> {{getUserProperty "availability"}}</p>
+              {{#if getUserProperty "facebook"}}
+                <button class="ui facebook icon button">
+                  <a target="_blank" href='{{getUserProperty "facebook"}}'> <i class="facebook icon"></i></a>
+                </button>
+              {{/if}}
+              {{#if getUserProperty "twitter"}}
+                <button class="ui twitter icon button">
+                  <a target="_blank" href='{{getUserProperty "twitter"}}'> <i class="twitter icon"></i></a>
+                </button>
+              {{/if}}
+              {{#if getUserProperty "linkedin"}}
+                <button class="ui linkedin icon button">
+                  <a target="_blank" href='{{getUserProperty "linkedin"}}'> <i class="linkedin icon"></i></a>
+                </button>
+              {{/if}}
+              {{#if getUserProperty "website"}}
+                <button class="ui icon button">
+                  <a target="_blank" href='{{getUserProperty "website"}}'> <i class="cloud icon"></i></a>
+                </button>
+              {{/if}}
+        </div>
+      </div>
+
+
+    <div class="actions">
+      <!-- if the user is not logged in, do not show the "Grab Coffee button" -->
+      {{#if currentUser}}
+        <button id="cancel" class="ui negative button">Cancel</button>
+        <button id="submitRequest" class="ui primary button">Grab Coffee</button>
+      {{else}}
+        <button id="cancel" class="ui negative button"> You must sign in to grab coffee</button>
+      {{/if}}
+    </div>
+  </div>
+
+<!-- Second modal sens the Coffee request -->
+  <div class="ui coupled second modal">
       <div class="header">Enter a message to go along with your request.</div>
     <div class="content">
       <div class="field">
@@ -137,7 +157,7 @@
       </div>
       <div class="actions">
         <button id="cancel" class="ui negative close cancel button">Cancel</button>
-        <button id="submitRequest" class="ui primary approve button">Send Request</button>
+        <button id="submitRequest" class="ui primary approve button">Grab Coffee</button>
       </div>
     </div>
   </div>
