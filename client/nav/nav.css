@@ -1,16 +1,28 @@
+.nav-wrapper {
+  position: sticky;
+}
+
+li {
+  position: sticky;
+}
+
 nav a:hover {
   color: white;
-  text-decoration: none;  
+  text-decoration: none;
 }
 
 nav a:active {
   color: white;
-  text-decoration: none;  
+  text-decoration: none;
 }
 
 nav a:visited {
   color: white;
-  text-decoration: none; 
+  text-decoration: none;
+}
+
+.searchbox {
+  width: 50%;
 }
 
 .login {

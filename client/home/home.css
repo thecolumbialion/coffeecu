@@ -43,7 +43,7 @@
 
 .people-home .load-more-button {
   margin: 30px auto;
-  display: block; 
+  display: block;
 }
 
 .people-home .person {
@@ -54,10 +54,6 @@
   margin-top: -10px;
   height: 280px;
   width: 280px;
-}
-
-.people-home .searchbox {
-  margin: 50px 0 50px 0;
 }
 
 .people-home .person .button {

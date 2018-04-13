@@ -6,6 +6,17 @@ Template.nav.rendered = function () {
   $('.menu .item').state();
 };
 
+Template.nav.helpers({
+  'peopleIndex': function () {
+    return PeopleIndex;
+  },
+  'inputAttributes': function () {
+    return {
+      placeholder: 'Search by name, school, UNI, major, about, contact for, availability and likes'
+    };
+  }
+});
+
 Template.logout.events({
   'click .logout': function () {
     AccountsTemplates.logout();
@@ -24,7 +35,7 @@ Meteor.startup(function(){
   if (Accounts._verifyEmailToken) {
     Accounts.verifyEmail(Accounts._verifyEmailToken, function(error) {
       Accounts._enableAutoLogin();
-      Router.go('/user/' + Meteor.userId());      
+      Router.go('/user/' + Meteor.userId());
     });
   }
 });
