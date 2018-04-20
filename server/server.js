@@ -197,6 +197,7 @@ Meteor.methods({
     if (!IsAdmin(Meteor.userId()) && id != Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
+    Meteor.users.remove(Meteor.userId());
     PeopleCollection.remove({ owner: id });
     PendingPeopleCollection.remove({ owner: id });
     RejectedPeopleCollection.remove({ owner: id });

@@ -1,9 +1,17 @@
 Accounts.validateNewUser( function (user) {
   var email;
-  if (user.services.google) {
-    email = user.services.google.email;
-  } else {
+  if (user.emails){
+    if(Meteor.users.findOne({'services.google.email': user.emails[0].address}))
+      throw new Meteor.Error(409, "You signed up via OAuth. Log in using the 'Sign in with Google' button.");
+
+
     email = user.emails[0].address.toLowerCase();
+  }
+  else{
+    if(Meteor.users.findOne({'emails.0.address': user.services.google.email}))
+      throw new Meteor.Error(409, "You signed up with a password. Log in or reset your password.");
+
+    email = user.services.google.email;
   }
 
   if (/[a-z]{2,3}\d*@(tc.|gsb.|law.)*(barnard|columbia)\.edu$/.test(email))  {
