@@ -14,7 +14,7 @@ Template.nav.helpers({
     return {
       placeholder: 'Search by name, school, UNI, major, about, contact for, availability and likes'
     };
-  }
+  },
 });
 
 Template.logout.events({
