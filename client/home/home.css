@@ -28,7 +28,6 @@
 }
 
 .meetings-made {
-  /*background: #64B5F6;*/
   position: absolute;
   left: 0px;
   right: 0px;
@@ -47,6 +46,23 @@
 .people-home .load-more-button {
   margin: 30px auto;
   display: block;
+}
+
+.searchbar {
+  position: relative;
+  background: white;
+  margin: 15px auto;
+  width: 70%;
+  white-space: nowrap;
+}
+
+i {
+  vertical-align: middle;
+}
+
+.searchbox {
+  position: relative;
+  margin-right: 100px;
 }
 
 .people-home .person {

@@ -6,17 +6,6 @@ Template.nav.rendered = function () {
   $('.menu .item').state();
 };
 
-Template.nav.helpers({
-  'peopleIndex': function () {
-    return PeopleIndex;
-  },
-  'inputAttributes': function () {
-    return {
-      placeholder: 'Search by name, school, UNI, major, about, contact for, availability and likes'
-    };
-  },
-});
-
 Template.logout.events({
   'click .logout': function () {
     AccountsTemplates.logout();

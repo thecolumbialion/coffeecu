@@ -2,10 +2,6 @@
   position: sticky;
 }
 
-li {
-  position: sticky;
-}
-
 nav a:hover {
   color: white;
   text-decoration: none;
@@ -19,10 +15,6 @@ nav a:active {
 nav a:visited {
   color: white;
   text-decoration: none;
-}
-
-.searchbox {
-  width: 50%;
 }
 
 .login {

@@ -2,6 +2,7 @@
   <!--{{> logo}}-->
   {{> parallax}}
   {{> intro}}
+  {{> search}}
   {{> meetingsMade}}
   {{> people}}
 </template>
@@ -41,8 +42,20 @@
   </div>
 </template>
 
+<template name="search">
+  <div class="ui centered grid">
+    <div class="searchbar">
+      <i class="material-icons">search</i>
+      <span class="searchbox">
+        {{> EasySearch.Input index=peopleIndex attributes=inputAttributes }}
+      </span>
+    </div>
+  </div>
+</template>
+
 <!-- Show the user profiles as card on the home page -->
 <template name="people">
+
   <div class="people-home">
     <div class="ui four column doubling stackable grid container">
 
