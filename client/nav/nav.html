@@ -3,8 +3,13 @@
   <nav class="blue lighten-2">
     <div class="nav-wrapper">
       <div class="ui container">
-        <ul id="nav-mobile">
+        
+        <a class="brand-logo left">
+          <img src="/img/logo.png" class="logo-image"/>
+          <span class="logo-title">Coffee@CU</span>
+        </a>
 
+        <ul id="nav-mobile">
           <li class="right">
             {{#if currentUser}}
             {{> logout}}

@@ -17,6 +17,17 @@ nav a:visited {
   text-decoration: none;
 }
 
+.logo-image {
+  width: 50px;
+  height: 50px;
+  margin-bottom: -15px;
+}
+
+.logo-title {
+  font-family: 'Dancing Script', cursive;
+  white-space: nowrap;
+}
+
 .login {
   margin: 50px auto 0 auto;
   width: 400px;
