@@ -100,9 +100,7 @@ AccountsTemplates.configureRoute('signIn', {
   redirect: function(){
     var user = Meteor.user();
     if (user) {
-     // Router.go('/user/' + user._id);
-     // have user go to home after login instead of profile page
-     Router.go('/');
+      Router.go('/');
     }
   }
 });
