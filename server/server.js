@@ -9,7 +9,7 @@ Meteor.methods({
   /* Explanation of variable names
   sender and receiver are primary keys
   senderName and receiverName are first names
-  senderUni and receiverUni are the part of emails before the @ (e.g. uni1234 or so firstname.lastname)
+  senderUni and receiverUni are the part of emails before the @ (e.g. uni1234 or firstname.lastname)
   sender and receiver are userDoc._id
   senderName and receiverName are obtained from userDoc.name
   senderUni and receiverUni are userDoc.uni
@@ -30,7 +30,12 @@ Meteor.methods({
       return "We're not sending that request since we suspect that you're a robot";
     }
 
-    var senderUni = PeopleCollection.findOne({owner: sender })['uni'];
+    var senderUni = PeopleCollection.findOne({owner: sender }).uni;
+    var senderName = PeopleCollection.findOne({owner: sender }).name;
+    var senderEmail = PeopleCollection.findOne({owner: sender }).username;
+
+    var receiverEmail = PeopleCollection.findOne({ owner: receiver }).username;
+
     if (senderUni == receiverUni){
       return "Cannot send a coffee request to yourself";
     }
@@ -43,32 +48,15 @@ Meteor.methods({
       return "You've already sent a coffee request to " + receiverName;
     }
 
-    var receiverEmail = PeopleCollection.findOne({ owner: receiver }).username;
-    var senderEmail = PeopleCollection.findOne({ owner: sender }).username;
-
     if (senderUni != null) {
-      // Check UNI cache first
-      console.log("senderUni" + senderUni);
-      var uni_details = UniCollection.find({ uni: senderUni }).fetch();
-      // If in cache, use that first
-      if (uni_details.length > 0) {
-        senderName = uni_details[0].name;
-          
+        console.log("senderUni" + senderUni);
+
         this.unblock();
-        SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
-          
-      }
-      else {
-          this.unblock();
-          var senderName = GetFirstName(senderUni);
-          UniCollection.insert({uni: senderUni, name: senderName});
+        SendEmailForCoffee(senderUni, senderEmail, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
 
-          SendEmailForCoffee(senderUni, senderName, receiverUni, receiverEmail, receiverName, additionalMessage);
-      } 
-      return "Email sent to " + receiverName;
-    }else{
+        return "Email sent to " + receiverName;
+    } else {
       return "You must be logged in to send CoffeeRequests!";
-
     }
   },
   rejectPendingUser: function (id, reason) {
@@ -235,10 +223,18 @@ var SendEmailForCoffee = function (senderUni, senderEmail, senderName, receiverU
     + "\n\nYou two should set some time to hang out. Some great places to meet at Columbia are: Joe's in NoCo, Up Coffee in the Journalism building, Brownie's Cafe in Avery, Carleton Lounge in Mudd or Cafe East in Lerner. Have a great time talking!\n\n" +
     "Cheers,\nThe Coffee@CU Team\n\n" + "Visit http://coffeecu.com to meet more Columbians.\n";
 
+  console.log({
+    to: to,
+    replyTo: replyTo,
+    cc: cc,
+    from: from,
+    subject: subject,
+    text: body
+  });
+
   SendEmail(to, replyTo, cc, from, subject, body);
   LogMeeting(senderUni, receiverUni);
 };
-
 
 var SendEmail = function (to, replyTo, cc, from, subject, body) {
   check([to, replyTo, cc, from, subject, body], [String]);

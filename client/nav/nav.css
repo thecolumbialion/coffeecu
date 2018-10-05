@@ -2,10 +2,6 @@
   position: sticky;
 }
 
-li {
-  position: sticky;
-}
-
 nav a:hover {
   color: white;
   text-decoration: none;
@@ -21,8 +17,15 @@ nav a:visited {
   text-decoration: none;
 }
 
-.searchbox {
-  width: 50%;
+.logo-image {
+  width: 50px;
+  height: 50px;
+  margin-bottom: -15px;
+}
+
+.logo-title {
+  font-family: 'Dancing Script', cursive;
+  white-space: nowrap;
 }
 
 .login {

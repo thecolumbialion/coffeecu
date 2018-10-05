@@ -100,7 +100,7 @@ AccountsTemplates.configureRoute('signIn', {
   redirect: function(){
     var user = Meteor.user();
     if (user) {
-      Router.go('/user/' + user._id);
+      Router.go('/');
     }
   }
 });

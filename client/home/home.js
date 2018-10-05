@@ -44,10 +44,7 @@ Template.meetingsMade.helpers({
   }
 });
 
-Template.people.helpers({
-  'people': function () {
-    return PeopleCollection.find().fetch();
-  },
+Template.search.helpers({
   'peopleIndex': function () {
     return PeopleIndex;
   },
@@ -55,6 +52,15 @@ Template.people.helpers({
     return {
       placeholder: 'Search by name, school, UNI, major, about, contact for, availability and likes'
     };
+  },
+});
+
+Template.people.helpers({
+  'people': function () {
+    return PeopleCollection.find().fetch();
+  },
+  'peopleIndex': function () {
+    return PeopleIndex;
   },
   'loadButtonAttributes': function () {
     return {
@@ -72,9 +78,9 @@ Template.people.events({
     for (property in this){
       console.log(property);
     }
-    
+
     Session.set('currentlySelected', this);
-      
+
     $('.coupled.modal')
       .modal({
         allowMultiple: false
@@ -97,12 +103,12 @@ Template.people.events({
               Materialize.toast(response, 4000);
             }
           });
-            
+
           reCAPTCHA.reset("1");
         }
       }).modal('attach events', '.first.modal .button.primary')
     ;
-    
+
     // show first now
     $('.first.modal').modal({name: Session.get('currentlySelected').name})
       .modal('show');
@@ -114,7 +120,7 @@ Template.uniPrompt.helpers({
     currentuser = Session.get("currentlySelected");
     if(currentuser){
       return currentuser[property];
-    }else{ 
+    }else{
       return "";
     }
   }
