@@ -85,7 +85,7 @@ i {
 .people-home .person .profilepic {
   margin-top: -10px;
   height: 280px;
-  width: 280px;
+  object-fit: cover;
 }
 
 .people-home .person .button {
