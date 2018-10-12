@@ -50,19 +50,32 @@
 
 .searchbar {
   position: relative;
-  background: white;
+  background: #0009;
   margin: 15px auto;
   width: 70%;
   white-space: nowrap;
+  border-radius: 5px;
 }
 
 i {
   vertical-align: middle;
 }
 
+.searchbar i {
+  color: #fffb;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: -5px;
+  margin-left: -5px;
+}
+
 .searchbox {
   position: relative;
-  margin-right: 100px;
+  color: #fffb;
+}
+
+.searchbox input {
+  width: 92%;
 }
 
 .people-home .person {
