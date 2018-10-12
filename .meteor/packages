@@ -46,3 +46,4 @@ shell-server
 google-config-ui
 dynamic-import
 percolate:synced-cron
+ecmascript
