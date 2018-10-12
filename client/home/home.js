@@ -25,7 +25,7 @@ Template.people.rendered = function () {
 
 Template.intro.helpers({
   'welcome': function () {
-    return data.welcome;
+    return "Meet amazing students in our community.";
   }
 });
 
