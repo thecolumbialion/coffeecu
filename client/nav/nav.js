@@ -8,8 +8,11 @@ Template.nav.rendered = function () {
 
 Template.nav.events({
   'click .brand-logo': function() {
+    console.log("logo clicked");
     var searchtext = document.querySelector(".searchbar .searchbox input");
     searchtext.value = "";
+
+    PeopleIndex.getComponentMethods().search("");
   }
 });
 
