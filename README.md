@@ -1,4 +1,8 @@
-# Coffee@CU
+Coffee@CU
+=========
+
+Setup
+-----
 
 To run locally, clone the repo with `git clone https://github.com/thecolumbialion/coffeecu.git`
 
@@ -87,7 +91,9 @@ For recaptcha:
 - bratanon:recaptcha
 
 
-# Access the server:
+Access the server
+-----------------
+
 We run this site on a Digital Ocean maintained by the ADI team. 
 For those authorized to work on the site, you need to generate a key that we use to authenticate your device before accessing the site.
 To generate this key, go to Terminal and type:
@@ -105,27 +111,32 @@ For trouble shooting, you can visit https://www.digitalocean.com/community/tutor
 
 
 
-# Deployment:
+Deployment
+----------
+
 To simplify the deployment process we use Meteor Up, a great tool that allows you to deploy a Meteor app to a server. 
 
 To use it, follow the instructions on the Github (https://github.com/zodern/meteor-up) page exactly. If you run into an error during the process, you most likely did not follow the instructions exactly. Make sure to try again 
 
-You mup.js file should look like this
-``` module.exports = {
+Your mup.js file should look like this:
+
+```javascript
+module.exports = {
   servers: {
     one: {
-      // TODO: set host address, username, and authentication method
       host: ‘{INSERT DROPLET IP ADDRESS HERE}’,
       username: 'root',
-//this path may be different for you if you saved key in a different location
-       pem: '~/.ssh/id_rsa' 
+      pem: '<path to private key>' 
     }
   },
 
   meteor: {
-    // TODO: change app name and path
     name: 'coffeecu',
-    path: ‘{path to coffeecu files on your local computer}’,
+    path: ‘{path to local coffeecu files}’,
+
+    volumes: {
+      '/upload': '/upload'
+    },
 
     servers: {
       one: {},
@@ -136,25 +147,14 @@ You mup.js file should look like this
     },
 
     env: {
-      // If you are using ssl, it needs to start with https://
-      ROOT_URL: 'http://coffeecu.com',
+      ROOT_URL: 'https://coffeecu.com',
       MONGO_URL: 'mongodb://localhost/meteor',
-  //mailgun url      
-  MAIL_URL: ‘MAIL URL’,
+      MAIL_URL: '{Mailgun URL}',
     },
 
-    // ssl: { // (optional)
-    //   // Enables let's encrypt (optional)
-    //   autogenerate: {
-    //     email: 'email.address@domain.com',
-    //     // comma seperated list of domains
-    //     domains: 'website.com,www.website.com'
-    //   }
-    // },
-
     docker: {
-           image: 'abernix/meteord:base',
-      // imagePort: 80, // (default: 80, some images EXPOSE different ports)
+      image: 'abernix/meteord:base',
+      prepareBundle: false
     },
 
     // This is the maximum time in seconds it will wait
@@ -174,13 +174,23 @@ You mup.js file should look like this
     servers: {
       one: {}
     }
+  },
+
+  proxy: {
+    domains: 'coffeecu.com,www.coffeecu.com',
+
+    ssl: {
+      // Enable Let's Encrypt
+      forceSSL: true,
+      letsEncryptEmail: '{Let's Encrypt email}'
+    }
   }
 }; 
 ```
 
-
-Hacks:
+Hacks
 -----
+
 materialize:materialize-custom is found in `/packages` and is pulled from [the GitHub repo](https://github.com/Dogfalo/materialize) and has the following modifications:
 `sass/components/_variables.scss` is modified for a custom color scheme. But we have to compile this scss. So in `package.js`, we add `api.use('fourseven:scss');` and 
 ```

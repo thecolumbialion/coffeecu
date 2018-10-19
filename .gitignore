@@ -1,9 +1,16 @@
+# Node
+node_modules/*
+package.json
+
+# Meteor Up
+mup.js
 settings.json
-*.swp
 .uploads/*
+.deploy/*
+
+# Misc
+.DS_Store
+*.swp
 upload/*
 logs/
-.DS_Store
-node_modules/*
-.deploy/*
 .idea/*
