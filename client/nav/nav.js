@@ -6,6 +6,13 @@ Template.nav.rendered = function () {
   $('.menu .item').state();
 };
 
+Template.nav.events({
+  'click .brand-logo': function() {
+    var searchtext = document.querySelector(".searchbar .searchbox input");
+    searchtext.value = "";
+  }
+});
+
 Template.logout.events({
   'click .logout': function () {
     AccountsTemplates.logout();
