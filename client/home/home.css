@@ -50,19 +50,32 @@
 
 .searchbar {
   position: relative;
-  background: white;
+  background: #0009;
   margin: 15px auto;
   width: 70%;
   white-space: nowrap;
+  border-radius: 5px;
 }
 
 i {
   vertical-align: middle;
 }
 
+.searchbar i {
+  color: #fffb;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: -5px;
+  margin-left: -5px;
+}
+
 .searchbox {
   position: relative;
-  margin-right: 100px;
+  color: #fffb;
+}
+
+.searchbox input {
+  width: 92%;
 }
 
 .people-home .person {
@@ -72,7 +85,7 @@ i {
 .people-home .person .profilepic {
   margin-top: -10px;
   height: 280px;
-  width: 280px;
+  object-fit: cover;
 }
 
 .people-home .person .button {
@@ -86,8 +99,13 @@ i {
 .recaptcha-box {
   margin: 20px 0 20px 0;
 }
+
 a, a:hover{
   color: white;
+}
+
+.at-form a, .at-form a:hover {
+  color:  rgb(30, 136, 229);;
 }
 
 .ui .modal img{
