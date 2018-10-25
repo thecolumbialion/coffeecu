@@ -219,11 +219,11 @@ var SendEmailForCoffee = function (senderUni, senderEmail, senderName, receiverU
   var from = 'do-not-reply@coffeecu.com';
   var subject = 'Coffee@CU: Request from ' + senderName;
   var body = `Hi ${receiverName},
-    \n\n${senderName} wants to chat with you.
-    \n\nHere's the message they included: ${additionalMessage}
-    \n\n${senderName}'s email is ${senderEmail}. You two should set some time to hang out. Some great places to meet at Columbia are: Joe Coffee in NoCo or in the Journalism building, Peet's in the Milstein Center, Carleton Lounge in Mudd, Cafe East in Lerner, Hungarian Pastry Shop on Amsterdam, Liz's Place in the Diana Center or Brownie's Cafe in Avery. Have a great time talking!
-    \n\nCheers,\nThe Coffee@CU Team
-    \n\n"}Visit http://coffeecu.com to meet more Columbians.\n`;
+    \n${senderName} wants to chat with you!
+    \nHere's the message they included: \n${additionalMessage}
+    \n${senderName}'s email is ${senderEmail}. You two should set some time to hang out. Some great places to meet at Columbia are: Joe Coffee in NoCo or in the Journalism building, Peet's in the Milstein Center, Carleton Lounge in Mudd, Cafe East in Lerner, Hungarian Pastry Shop on Amsterdam, Liz's Place in the Diana Center or Brownie's Cafe in Avery. Have a great time talking!
+    \nCheers,\nThe Coffee@CU Team
+    \nVisit http://coffeecu.com to meet more Columbians.\n`;
 
   console.log({
     to: to,
