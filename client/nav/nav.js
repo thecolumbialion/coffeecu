@@ -6,6 +6,16 @@ Template.nav.rendered = function () {
   $('.menu .item').state();
 };
 
+Template.nav.events({
+  'click .brand-logo': function() {
+    console.log("logo clicked");
+    var searchtext = document.querySelector(".searchbar .searchbox input");
+    searchtext.value = "";
+
+    PeopleIndex.getComponentMethods().search("");
+  }
+});
+
 Template.logout.events({
   'click .logout': function () {
     AccountsTemplates.logout();
