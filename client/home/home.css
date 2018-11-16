@@ -96,6 +96,16 @@ i {
   margin-top: 10px;
 }
 
+span.like {
+    padding: 1px 5px;
+    border-radius: 5px;
+    background-color: inherit;
+    border: #50b3eb;
+    margin: 1.5px;
+    display: inline-block;
+    color: white;
+}
+
 .recaptcha-box {
   margin: 20px 0 20px 0;
 }
