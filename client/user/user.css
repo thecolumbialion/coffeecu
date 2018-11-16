@@ -22,3 +22,66 @@ form.profileupdate {
 .form.profileupdate .gutter {
   width: 15px;
 }
+
+
+element.style {
+}
+.ui.multiple.search.dropdown > .text {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: inherit;
+    margin: 0.45240952em 0em 0.45240952em 0.71428571em;
+    line-height: 1.2142em;
+}
+.ui.dropdown > .default.text, .ui.default.dropdown > .text {
+    color: rgba(179, 179, 179, 0.7);
+}
+.ui.multiple.dropdown > .text {
+    position: static;
+    padding: 0;
+    max-width: 100%;
+    margin: 0.45240952em 0em 0.45240952em 0.71428571em;
+    line-height: 1.2142em;
+}
+.ui.search.dropdown > .text {
+    cursor: text;
+    position: relative;
+    z-index: 3;
+}
+.ui.dropdown > .text {
+    display: inline-block;
+    -webkit-transition: none;
+    transition: none;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.ui.multiple.search.dropdown, .ui.multiple.search.dropdown > input.search {
+    cursor: text;
+}
+.ui.fluid.ui.search.dropdown .default.text {
+  font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  margin-left: 0em;
+  margin-top: 0.8em;
+  outline: none;
+  -webkit-appearance: none;
+  line-height: 1.2142em;
+  padding: 0.67861429em 0.5em;
+  font-size: 1em;
+  background: transparent;
+  border: none;
+  color: rgba(0, 0, 0, 0.5);
+  border-radius: 0em;
+  box-shadow: none;
+  -webkit-transition: color 0.1s ease, border-color 0.1s ease;
+  transition: color 0.1s ease, border-color 0.1s ease;
+}

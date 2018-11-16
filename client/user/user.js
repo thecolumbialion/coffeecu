@@ -5,6 +5,7 @@ Tracker.autorun(function () {
 
 Session.set('user', {});
 
+
 Template.profileupdate.rendered = function () {
   $('.ui .form')
   .form({
@@ -48,10 +49,6 @@ Template.profileupdate.rendered = function () {
           {
             type   : 'empty',
             prompt : 'Please enter your major.'
-          },
-          {
-            type   : 'maxLength[40]',
-            prompt : "Wow, you must be smart! That's a lot of words to describe what you study. Try summing it up in under 41 characters."
           }
         ]
       },
@@ -171,7 +168,9 @@ Template.profileupdate.rendered = function () {
         ]
       }
     }
-  });
+  })
+  $('.ui.fluid.search.dropdown').dropdown();
+  ;
 
   Meteor.call('searchCollectionsToPopulateProfile', Meteor.userId(), function (error, response) {
     Session.set('user', response);
