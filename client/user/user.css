@@ -23,9 +23,10 @@ form.profileupdate {
   width: 15px;
 }
 
-
-element.style {
+div.ui.dropdown.selection input.search { 
+    height: 1.5rem;
 }
+
 .ui.multiple.search.dropdown > .text {
     display: inline-block;
     position: absolute;
@@ -69,12 +70,13 @@ div {
     cursor: text;
 }
 .ui.fluid.ui.search.dropdown .default.text {
+  height: 1.5rem;
   font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
   margin-left: 0em;
   margin-top: 0.8em;
   outline: none;
   -webkit-appearance: none;
-  line-height: 1.2142em;
+  line-height: 0.0142em;
   padding: 0.67861429em 0.5em;
   font-size: 1em;
   background: transparent;

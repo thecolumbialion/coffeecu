@@ -119,7 +119,19 @@ Template.uniPrompt.helpers({
   getUserProperty(property){
     currentuser = Session.get("currentlySelected");
     if(currentuser){
-      return currentuser[property];
+      console.log(currentuser[property]);
+      if(property == "major"){
+        var majorsList = currentuser[property]; 
+        var majorString = ""; 
+        for(var i = 0; i < majorsList.length-1; i++){
+          majorString += majorsList[i] + " and ";
+        }
+        majorString += majorsList[majorsList.length-1];
+        return majorString; 
+      } 
+      else {
+        return currentuser[property];
+      }
     }else{
       return "";
     }

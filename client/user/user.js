@@ -168,9 +168,9 @@ Template.profileupdate.rendered = function () {
         ]
       }
     }
-  })
-  $('.ui.fluid.search.dropdown').dropdown();
-  ;
+  });
+  $('.ui.fluid.search.dropdown').dropdown({delimiter: ", "});
+  
 
   Meteor.call('searchCollectionsToPopulateProfile', Meteor.userId(), function (error, response) {
     Session.set('user', response);
@@ -231,10 +231,18 @@ Template.profileupdate.events({
       email = Meteor.user().emails[0].address.toLowerCase();
     }
 
+    // turn majors into list to use as tags 
+    var majorList = [];
+    var nodes = $("a.ui.label.transition.visible");
+    for (var i = 0; i < nodes.length; i++) {
+        var item = nodes[i];
+        majorList.push(item.innerText);
+    }
+    var major = majorList;
+
     var uni = email.substr(0, email.indexOf('@'));
     var school = event.target.school.value;
     var year = event.target.year.value;
-    var major = event.target.major.value;
     var pronounsBox = event.target.pronounsBox.value;
     var about = event.target.about.value;
     var likes = event.target.likes.value;
