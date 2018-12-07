@@ -123,6 +123,10 @@ Template.uniPrompt.helpers({
     }else{
       return "";
     }
+  },
+
+  isArray(item) {
+    return Array.isArray(item);
   }
 
 });
