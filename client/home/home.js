@@ -10,6 +10,52 @@ Tracker.autorun(function () {
 
 Session.set('currentlySelected', null);
 
+//
+Template.sortBy.events({
+    "change #year-search": function (event) {
+      event.preventDefault();
+      var category = event.target.value;
+      PeopleIndex.getComponentMethods().addProps('sortYear', category);
+    },
+    "change #school-search": function (event) {
+      event.preventDefault();
+      var category = event.target.value;
+      PeopleIndex.getComponentMethods().addProps('sortSchool', category);
+    },
+    "change #major-search": function (event) {
+      event.preventDefault();
+      var category = event.target.value;
+      PeopleIndex.getComponentMethods().addProps('sortMajor', category);
+    },
+});
+
+Template.sortBy.helpers({
+  'getyears': function() {
+
+    Meteor.call('getPeopleYears', function (error, response) {
+      Session.set('years', response.filter(Boolean).sort());
+    });
+
+    return Session.get('years');
+  }, 
+  'getschools': function() {
+
+    Meteor.call('getPeopleSchools', function (error, response) {
+      Session.set('schools', response.filter(Boolean).sort());
+    });
+
+    return Session.get('schools');
+  },
+  'getmajors': function() {
+
+    Meteor.call('getPeopleMajors', function (error, response) {
+      Session.set('majors', response.filter(Boolean).sort());
+    });
+
+    return Session.get('majors');
+  }
+});
+
 Template.people.rendered = function () {
   $(document).ready(function(){
     $('.ui.accordion').accordion({exclusive: true});

@@ -4,7 +4,42 @@
   {{> intro}}
   {{> search}}
   {{> meetingsMade}}
+  {{> sortBy}}
   {{> people}}
+</template>
+
+<template name="sortBy">
+  <div class="sort-criteria">
+    <div class="ui four column double stackable grid container">
+      <div class="five wide column">
+    <select id="year-search" class="ui dropdown">
+      <option disabled="disabled" selected="selected">Year</option> 
+      <option  name="year-opt" value="All">All</option> 
+      {{#each getyears}}
+        <option name="year-opt" value="{{this}}">{{this}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="five wide column">
+    <select id="school-search" class="ui dropdown">
+      <option disabled="disabled" selected="selected">School</option> 
+      <option  name="school-opt" value="All">All</option> 
+      {{#each getschools}}
+        <option name="school-opt" value="{{this}}">{{this}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="five wide column">
+    <select id="major-search" class="ui dropdown">
+      <option disabled="disabled" selected="selected">Majors</option> 
+      <option  name="major-opt" value="All">All</option> 
+      {{#each getmajors}}
+        <option name="major-opt" value="{{this}}">{{this}}</option>
+      {{/each}}
+    </select>
+  </div>
+  </div>
+</div>
 </template>
 
 <template name="parallax">

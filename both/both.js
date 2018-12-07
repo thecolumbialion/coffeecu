@@ -71,9 +71,30 @@ PeopleIndex = new EasySearch.Index({
   collection: PeopleCollection,
   fields: ['name', 'school', 'major', 'pronouns', 'contactfor', 'availability', 'likes', 'about', 'uni'],
   engine: new EasySearch.MongoDB({
-    sort: function() {
-      return [["random_sort", "asc"]];
+    sort: function (searchObject, options) {
+      //const sortBy = options.search.props.sortBy
+      return {'year': -1}
     },
+    selector: function (searchObject, options, aggregation) {
+      const selector = this.defaultConfiguration().selector(searchObject, options, aggregation),
+        yearFilter = options.search.props.sortYear;
+        schoolFilter = options.search.props.sortSchool;
+        majorFilter = options.search.props.sortMajor;
+
+      // console.log(categoryFilter);
+
+      if (_.isString(yearFilter) && !_.isEmpty(yearFilter) && !(yearFilter === 'All')) {
+        selector.year = yearFilter;
+      }
+      if (_.isString(schoolFilter) && !_.isEmpty(schoolFilter) && !(schoolFilter === 'All')) {
+        selector.school = schoolFilter;
+      }
+      if (_.isString(majorFilter) && !_.isEmpty(majorFilter) && !(majorFilter === 'All')) {
+        selector.major = majorFilter;
+      }
+
+      return selector;
+    }
   }),
   name: 'peopleIndex',
   defaultSearchOptions: {
