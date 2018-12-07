@@ -238,7 +238,13 @@ Template.profileupdate.events({
     var major = event.target.major.value;
     var pronounsBox = event.target.pronounsBox.value;
     var about = event.target.about.value;
+    
     var likes = event.target.likes.value;
+    if (!Array.isArray(likes)) {
+      var splitregex = /\s*,\s*/;
+      likes = likes.split(splitregex);
+    }
+
     var contactfor = event.target.contactfor.value;
     var availability = event.target.availability.value;
     var twitter = event.target.twitter.value;
