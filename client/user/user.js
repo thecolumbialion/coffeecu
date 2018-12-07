@@ -5,6 +5,7 @@ Tracker.autorun(function () {
 
 Session.set('user', {});
 
+
 Template.profileupdate.rendered = function () {
   $('.ui .form')
   .form({
@@ -48,10 +49,6 @@ Template.profileupdate.rendered = function () {
           {
             type   : 'empty',
             prompt : 'Please enter your major.'
-          },
-          {
-            type   : 'maxLength[40]',
-            prompt : "Wow, you must be smart! That's a lot of words to describe what you study. Try summing it up in under 41 characters."
           }
         ]
       },
@@ -172,6 +169,8 @@ Template.profileupdate.rendered = function () {
       }
     }
   });
+  $('.ui.fluid.search.dropdown').dropdown({delimiter: ", "});
+  
 
   Meteor.call('searchCollectionsToPopulateProfile', Meteor.userId(), function (error, response) {
     Session.set('user', response);
@@ -232,10 +231,18 @@ Template.profileupdate.events({
       email = Meteor.user().emails[0].address.toLowerCase();
     }
 
+    // turn majors into list to use as tags 
+    var majorList = [];
+    var nodes = $("a.ui.label.transition.visible");
+    for (var i = 0; i < nodes.length; i++) {
+        var item = nodes[i];
+        majorList.push(item.innerText);
+    }
+    var major = majorList;
+
     var uni = email.substr(0, email.indexOf('@'));
     var school = event.target.school.value;
     var year = event.target.year.value;
-    var major = event.target.major.value;
     var pronounsBox = event.target.pronounsBox.value;
     var about = event.target.about.value;
     var likes = event.target.likes.value;

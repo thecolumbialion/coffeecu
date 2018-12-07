@@ -152,7 +152,11 @@
                 <p><b>Pronouns:</b> {{getUserProperty "pronounsBox"}}</p>
               {{/if}}
               <p><b>About:</b> {{getUserProperty "about"}}</p>
-              <p><b>Likes:</b> {{getUserProperty "likes"}}</p>
+              <p><b>Likes:</b> 
+                {{#each like in getUserProperty "likes"}}
+                  <span class="like">{{ like }}</span>
+                {{/each}}
+              </p>
               <p><b>Contact me for:</b> {{getUserProperty "contactfor"}}</p>
               <p><b>Availability:</b> {{getUserProperty "availability"}}</p>
               {{#if getUserProperty "facebook"}}
