@@ -15,7 +15,7 @@ Meteor.startup(function () {
       return formData.id + '_dp.jpg';
     },
     finished: function (fileInfo, formFields) { // construct final url baseUrl/uploads/profilePic/<id>_dp.jpg
-      fileInfo.finalUrl = "/upload/" + fileInfo.path;
+      fileInfo.finalUrl = fileInfo.path;
     },
     maxFileSize: 10000000, // 10 MB 
     mimeTypes: {
