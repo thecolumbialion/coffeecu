@@ -204,7 +204,6 @@ Template.profileupdate.rendered = function () {
         $('#profile-image').attr('src', fileInfo.finalUrl + "?preventcache=" + Date.now());
       };
     });
-
   });
 };
 
