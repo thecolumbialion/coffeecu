@@ -118,13 +118,13 @@
               {{/if}}
               <p><b>About:</b> {{getUserProperty "about"}}</p>
               <p><b>Likes:</b>
-                  {{#unless isArray getUserProperty "likes" }}
+                  {{#if isArray "likes" }}
                     {{#each like in getUserProperty "likes"}}
                       <span class="like">{{ like }}</span>
                     {{/each}}
                   {{else}}
                     {{getUserProperty "likes"}}
-                  {{/unless}}
+                  {{/if}}
               </p>
               <p><b>Contact me for:</b> {{getUserProperty "contactfor"}}</p>
               <p><b>Availability:</b> {{getUserProperty "availability"}}</p>
