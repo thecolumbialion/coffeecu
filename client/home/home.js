@@ -75,9 +75,9 @@ Template.people.helpers({
 
 Template.people.events({
   'click #contact': function () {
-    for (property in this){
+    /* for (property in this){
       console.log(property);
-    }
+    } */
 
     Session.set('currentlySelected', this);
 
@@ -116,7 +116,7 @@ Template.people.events({
 });
 
 Template.uniPrompt.helpers({
-  getUserProperty(property){
+  'getUserProperty': function(property){
     currentuser = Session.get("currentlySelected");
     if(currentuser){
       console.log(currentuser[property]);
@@ -134,6 +134,18 @@ Template.uniPrompt.helpers({
       }
     }else{
       return "";
+    }
+  },
+
+  /* Polyfill for the Array.isArray function
+   * because it is not natively available in Meteor/Spacebars
+   */ 
+  'isArray': function(property) {
+    currentuser = Session.get("currentlySelected");
+    if(currentuser){
+      return Object.prototype.toString.call(currentuser[property]) === '[object Array]';
+    }else{
+      return false;
     }
   }
 
