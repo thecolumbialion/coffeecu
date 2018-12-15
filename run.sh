@@ -1,1 +1,2 @@
-meteor --settings settings.json
+#!/bin/bash
+meteor --settings=".deploy/settings.json"
