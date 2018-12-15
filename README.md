@@ -123,8 +123,6 @@ module.exports = {
 }; 
 ```
 
-Note: If your SSH key has a passphrase, you may need to login using an [SSH agent][ssh-agent]
-
 Access the Server
 -----------------
 
@@ -223,4 +221,3 @@ materialize:materialize-custom is found in `/packages` and is pulled from [the G
 [coffeecu]: https://coffeecu.com
 [mup]: http://meteor-up.com/
 [mup-github]: https://github.com/zodern/meteor-up
-[ssh-agent]: https://www.ssh.com/ssh/agent

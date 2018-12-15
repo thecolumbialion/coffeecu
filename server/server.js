@@ -96,7 +96,7 @@ Meteor.methods({
     var from = 'do-not-reply@coffeecu.com';
     var subject = 'Coffee@CU: Profile update declined';
     var body = "Hi,\n\n" +
-      "Your recent profile update request to Coffee@CU was rejected.\n\nReason: " + reason + "\n\nPlease make the above changes and request an update to your profile again at https://coffeecu.com.\n\nCheers,\nThe Coffee@CU Team ";
+      "Your recent profile update request to Coffee@CU was rejected.\n\nReason: " + reason + "\n\nPlease make the above changes and request an update to your profile again at http://coffeecu.com.\n\nCheers,\nThe Coffee@CU Team ";
     SendEmail(to, "", from, subject, body);
   },
   insertPendingUser: function (id,
@@ -223,7 +223,7 @@ var SendEmailForCoffee = function (senderUni, senderEmail, senderName, receiverU
     \nHere's the message they included: \n${additionalMessage}
     \n${senderName}'s email is ${senderEmail}. You two should set some time to hang out. Some great places to meet at Columbia are: Joe Coffee in NoCo or in the Journalism building, Peet's in the Milstein Center, Carleton Lounge in Mudd, Cafe East in Lerner, Hungarian Pastry Shop on Amsterdam, Liz's Place in the Diana Center or Brownie's Cafe in Avery. Have a great time talking!
     \nCheers,\nThe Coffee@CU Team
-    \nVisit https://coffeecu.com to meet more Columbians.\n`;
+    \nVisit http://coffeecu.com to meet more Columbians.\n`;
 
   console.log({
     to: to,

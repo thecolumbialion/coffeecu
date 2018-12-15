@@ -200,9 +200,10 @@ Template.profileupdate.rendered = function () {
     Meteor.startup(function () {
       Uploader.finished = function(index, fileInfo, templateContext) {
         Session.set('UploadedImageUrl', fileInfo.finalUrl);
-        $('#profile-image').attr('src', "/upload/" + fileInfo.finalUrl + "?preventcache=" + Date.now());
+        $('#profile-image').attr('src', fileInfo.finalUrl + "?preventcache=" + Date.now());
       };
     });
+
   });
 };
 
@@ -262,7 +263,7 @@ Template.profileupdate.events({
 
     var image = event.target.image.src;
     if (Session.get('UploadedImageUrl')) {
-      image = "/upload/" + Session.get('UploadedImageUrl');
+      image = Session.get('UploadedImageUrl');
     }
     Session.set('UploadedImageUrl', '');
 
