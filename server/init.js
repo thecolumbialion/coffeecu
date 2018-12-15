@@ -14,20 +14,8 @@ Meteor.startup(function () {
     getFileName: function (fileInfo, formData) { // rename files to <id>_dp.jpg 
       return formData.id + '_dp.jpg';
     },
-    finished: function (fileInfo, formFields) {
-      var re = /\w*_dp.jpg/;
-      if(fileInfo.path.match(re)) {
-        var url = fileInfo.path.match(re)[0];
-        if(url !== null) {
-          fileInfo.finalUrl = url;
-        }
-        else {
-          fileInfo.finalUrl = '';
-        }
-      }
-      else {
-        fileInfo.finalUrl = '';
-      }
+    finished: function (fileInfo, formFields) { // construct final url baseUrl/uploads/profilePic/<id>_dp.jpg
+      fileInfo.finalUrl = "/upload/" + fileInfo.path;
     },
     maxFileSize: 10000000, // 10 MB 
     mimeTypes: {
