@@ -5,6 +5,15 @@ Meteor.methods({
   countMeetings: function () {
     return MeetingsCollection.find().fetch().length;
   },
+  getPeopleYears: function() {
+    return PeopleCollection.rawCollection().distinct('year');
+  },
+  getPeopleSchools: function() {
+    return PeopleCollection.rawCollection().distinct('school');
+  },
+  getPeopleMajors: function() {
+    return PeopleCollection.rawCollection().distinct('major');
+  },
 
   /* Explanation of variable names
   sender and receiver are primary keys
