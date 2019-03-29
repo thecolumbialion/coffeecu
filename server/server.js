@@ -189,7 +189,16 @@ Meteor.methods({
                             {upsert: true});
                             PendingPeopleCollection.remove({owner: id});
                             RejectedPeopleCollection.remove({owner: id});
-  },
+  
+// Send email
+    var to = userToMove.username;
+    var from = 'do-not-reply@coffeecu.com';
+    var subject = 'Coffee@CU: Profile update accepted!';
+    var body = "Hi,\n\n" +
+      "Your recent profile update request to Coffee@CU was approved! \n\nHave fun making new connections while grabbing coffee at http://coffeecu.com.\n\nCheers,\nThe Coffee@CU Team ";
+    SendEmail(to, "", from, subject, body);
+
+},
   deleteUser: function (id) {
     if (!IsAdmin(Meteor.userId()) && id != Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
