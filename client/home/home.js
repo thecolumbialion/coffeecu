@@ -167,13 +167,8 @@ Template.uniPrompt.helpers({
     if(currentuser){
       console.log(currentuser[property]);
       if(property == "major"){
-        var majorsList = currentuser[property]; 
-        var majorString = ""; 
-        for(var i = 0; i < majorsList.length-1; i++){
-          majorString += majorsList[i] + " and ";
-        }
-        majorString += majorsList[majorsList.length-1];
-        return majorString; 
+        var majors = currentuser[property]; 
+        return majors; 
       } 
       else {
         return currentuser[property];

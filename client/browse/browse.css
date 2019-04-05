@@ -1,0 +1,91 @@
+.logo {
+  position: absolute;
+  left:0;
+  right:0;
+  margin-top: -370px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 2;
+}
+
+.brand-image {
+  height: 200px;
+}
+
+.brand-title {
+  font-family: 'Dancing Script', cursive;
+  color: white;
+  font-size: 4em;
+}
+
+.welcome {
+  position: relative;
+  margin: 100px auto 30px auto;
+  max-width: 1024px;
+  font-size: 2.5em;
+  text-align: center;
+  color: white;
+}
+
+.matches-browse {
+  margin-top: 100px;
+}
+
+.matches-browse .load-more-button {
+  margin: 30px auto;
+  display: block;
+}
+
+.matches-browse .person {
+  width: 300px;
+}
+
+.matches-browse .person .profilepic {
+  margin-top: -10px;
+  height: 280px;
+  object-fit: cover;
+}
+
+.matches-browse .person .button {
+  width: 30px;
+}
+
+.matches-browse .person .contact-button {
+  margin-top: 10px;
+}
+
+.matches-found {
+  position: relative;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: 120px;
+}
+
+.matches-found .statistic {
+  padding-top: 24px;
+}
+
+span.matches {
+    padding: 1px 5px;
+    border-radius: 5px;
+    background-color: #50b3eb;
+    margin: 1.5px;
+    display: inline-block;
+    color: white;
+}
+
+.recaptcha-box {
+  margin: 20px 0 20px 0;
+}
+
+a, a:hover{
+  color: white;
+}
+
+.at-form a, .at-form a:hover {
+  color:  rgb(30, 136, 229);;
+}
+
+.ui .modal img{
+}
