@@ -20,8 +20,7 @@ Template.matches.helpers({
   },
   'loadAttributes': function () {
     return {
-      class: 'waves-effect waves-light btn load-more-button',
-      value: likes
+      class: 'waves-effect waves-light btn load-more-button'
     };
   },
   'makeVisible': function () {
