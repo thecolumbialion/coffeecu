@@ -44,7 +44,8 @@ Meteor.methods({
     var senderEmail = PeopleCollection.findOne({owner: sender }).username;
 
     var receiverEmail = PeopleCollection.findOne({ owner: receiver }).username;
-
+    var prevDate = MeetingsCollection.findOne({sender_uni: senderUni, receiver_uni: receiverUni}).requestedOn;
+    
     if (senderUni == receiverUni){
       return "Cannot send a coffee request to yourself";
     }
@@ -54,7 +55,12 @@ Meteor.methods({
     }
 
     if(MeetingsCollection.find({ sender_uni: senderUni, receiver_uni: receiverUni }).fetch().length > 0) {
-      return "You've already sent a coffee request to " + receiverName;
+	var currDate = new Date();
+	var c = new Date();
+	c.setMonth(currDate.getMonth() - 2);
+        if (c < prevDate){
+	    return "You've already sent a coffee request to " + receiverName + "in the last 3 months.";
+	}
     }
 
     if (senderUni != null) {
@@ -270,7 +276,8 @@ var SendEmail = function (to, replyTo, cc, from, subject, body) {
 };
 
 var LogMeeting = function(senderUni, receiverUni) {
-  MeetingsCollection.insert({sender_uni: senderUni, receiver_uni: receiverUni});
+	var timestamp = new Date();
+  MeetingsCollection.insert({sender_uni: senderUni, receiver_uni: receiverUni, requestedOn: timestamp.toISOString()  });
 };
 
 IsAdmin = function(id) {
