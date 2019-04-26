@@ -1,0 +1,60 @@
+<template name="Browse">
+  {{> parallax}}
+  {{> header}}
+  {{> matchesFound}}
+  {{> matches}}
+</template>
+
+<template name="matches">
+  <div class="matches-browse">
+    <div class="ui four column doubling stackable grid container">
+
+    {{> EasySearch.Input index=matchesIndex attributes=inputAttributes}}
+        {{#EasySearch.Each index=matchesIndex}}
+        {{#if makeVisible}}
+      <div class="five wide column">
+        <div id="contact" class="ui raised segment person">
+          <div class="ui centered grid">
+
+              <div class="row">
+                <img src="{{image}}" class="profilepic ui rounded image"/>
+              </div>
+
+            <div class="row">
+              <h2 class="name">{{name}}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+        {{/EasySearch.Each}}
+     </div>
+     {{> EasySearch.LoadMore index=matchesIndex attributes=loadAttributes count=12}}
+
+    {{#EasySearch.IfNoResults index=matchesIndex}}
+      <div class="no-results">No results found</div>
+    {{/EasySearch.IfNoResults}}
+  </div>
+    {{> uniPrompt}}
+</template>
+
+
+<template name="matchesFound">
+  <div class="matches-found">
+    <div class="ui centered grid">
+      <div class="ui inverted large statistic">
+        <div class="value">
+         {{matches.length}}
+        </div>
+        <div class="label">
+          matches found
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<template name="header">
+  <div class="welcome">
+    {{#markdown}}{{welcome}}{{/markdown}}
+  </div>
+</template>

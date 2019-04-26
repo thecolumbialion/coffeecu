@@ -7,6 +7,11 @@ Router.route('/', function () {
   this.render('Home');
 });
 
+Router.route('/browse', function () {
+  this.render('Browse');
+});
+
+
 Router.route('/user/:userid', function () {
   if (this.params.userid == Meteor.userId()){
     this.render('User');

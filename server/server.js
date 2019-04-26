@@ -14,6 +14,10 @@ Meteor.methods({
   getPeopleMajors: function() {
     return PeopleCollection.rawCollection().distinct('major');
   },
+  getPeopleLikes: function() {
+    return PeopleCollection.rawCollection().distinct('likes');
+  },
+
 
   /* Explanation of variable names
   sender and receiver are primary keys
