@@ -138,6 +138,16 @@ Template.profileupdate.rendered = function () {
           }
         ]
       },
+      twitter: {
+        identifier  : 'instagram',
+        optional: true,
+        rules: [
+          {
+            type   : 'url',
+            prompt : "Please enter a valid URL (with the 'https://' part). eg - https://instagram.com/columbia"
+          }
+        ]
+      },
       linkedin: {
         identifier  : 'linkedin',
         optional: true,
@@ -256,6 +266,7 @@ Template.profileupdate.events({
     var availability = event.target.availability.value;
     var twitter = event.target.twitter.value;
     var facebook = event.target.facebook.value;
+    var instagram = event.target.instagram.value;
     var linkedin = event.target.linkedin.value;
     var website = event.target.website.value;
     var make_public = event.target.make_public.checked;
