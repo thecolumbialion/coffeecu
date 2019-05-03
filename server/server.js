@@ -266,7 +266,8 @@ text: body
 };
 
 var LogMeeting = function(senderUni, receiverUni) {
-	MeetingsCollection.insert({sender_uni: senderUni, receiver_uni: receiverUni});	
+var timestamp = new Date();
+  MeetingsCollection.insert({sender_uni: senderUni, receiver_uni: receiverUni, requestedOn: timestamp.toISOString()});	
 };
 
 IsAdmin = function(id) {
