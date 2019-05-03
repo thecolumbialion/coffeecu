@@ -1,0 +1,27 @@
+{
+  "public": {
+    "recaptcha": {
+      "key": [
+        "<recaptcha-key>"
+      ]
+    }
+  },
+  "private": {
+    "mailgun": {
+      "host": "smtp.mailgun.org",
+      "username": "<mailgun-username>",
+      "password": "<mailgun-password>",
+      "port": 587
+    },
+    "google": {
+      "clientId": "<google-client-id>",
+      "secret": "<google-secret-key>"
+    },
+    "recaptcha": {
+      "secret": "<recaptcha-secret-key>"
+    },
+    "admins": [
+      "<admin-id>"
+    ]
+  }
+}
